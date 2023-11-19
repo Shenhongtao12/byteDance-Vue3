@@ -2,7 +2,7 @@
   <div class="header" :class="[{ fixedToTop }, themeColor]" ref="header">
     <div class="logo">
       <a href="/">
-        <logo :is-transparent="themeColor === 'is-transparent'"></logo>
+        <img src="../assets/logo.png" class="logo"/>
       </a>
     </div>
     <ul class="navbar">
@@ -49,19 +49,6 @@
           </li>
         </router-link>
       </div>
-
-      <!--      <div class="dropdown-menu" v-else>-->
-      <!--        <span class="dropdown-menu__email">-->
-      <!--          {{ state.userInfo.email }}-->
-      <!--          <i class="arrow"></i>-->
-      <!--        </span>-->
-      <!--        <ul class="dropdown-menu__wrapper">-->
-      <!--          <li class="dropdown-menu__item">-->
-      <!--            <router-link to="/resume">我的简历</router-link>-->
-      <!--          </li>-->
-      <!--          <li class="dropdown-menu__item" @click="handleLogout">退出</li>-->
-      <!--        </ul>-->
-      <!--      </div>-->
     </div>
   </div>
 </template>
@@ -105,7 +92,7 @@ const {themeColor, fixedToTop} = toRefs(props)
 </script>
 <style lang="less" scoped>
 .header {
-  color: #aaa;
+  color: #000000;
   display: flex;
   height: 64px;
   align-items: center;
@@ -187,9 +174,8 @@ const {themeColor, fixedToTop} = toRefs(props)
   }
 
   .logo {
-    width: 200px;
-    height: 100%;
-
+    width: 50px;
+    vertical-align: middle;
     a {
       height: 100%;
       display: block;

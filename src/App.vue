@@ -6,7 +6,7 @@
           :class="{ [animationName]: $route.name === 'home' }"
           :fixedToTop="$route.path === '/'"
           ref="header"
-          :theme-color="themeColor"
+          theme-color="main-color"
       ></Header>
     </header>
     <main>
@@ -16,7 +16,7 @@
         </transition>
       </router-view>
     </main>
-    <footer v-if="$route.name !== 'products'">
+    <footer>
       <Footer></Footer>
     </footer>
   </div>

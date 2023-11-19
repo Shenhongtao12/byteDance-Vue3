@@ -2,18 +2,7 @@
   <div class="home">
     <div ref="banner" class="banner content-item-block">
       <div class="video-wrapper">
-        <video
-            ref="video"
-            class="video"
-            preload="auto"
-            muted
-            loop
-            playsinline
-            autoplay
-            poster="//sf3-ttcdn-tos.pstatp.com/obj/ttfe/ATSX/mainland/video-poster_1576231362701.png"
-            src="//sf1-ttcdn-tos.pstatp.com/obj/ttfe/ATSX/mainland/gongquhunjian_1080.min.mp4"
-            tabindex="-1"
-        ></video>
+        
       </div>
       <h1 class="banner-title">
         激发创造 丰富生活
@@ -161,7 +150,6 @@
         <h2 class="title">员工故事</h2>
         <ul class="staffStory-list clearfix">
           <router-link
-              tag="li"
               :to="`/staff-stories/${item.id}`"
               v-for="item in staffStories"
               :key="item.id"
@@ -354,7 +342,6 @@ const getProductList = async () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(51, 112, 255, 0.2);
   position: relative;
 
   .video-wrapper {
