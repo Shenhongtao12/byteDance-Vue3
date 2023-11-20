@@ -1,8 +1,28 @@
 <template>
   <div class="home">
-    <div ref="banner" class="banner content-item-block">
+    <div class="indicator-grid-container">
+      <indicator-card :backgroundImage="card1Image" title="产业链" subTitle="两链融合" price="12" unit="条" />
+      <indicator-card :backgroundImage="card2Image" title="总交易金额" subTitle="技术交易" price="4.5" unit="亿元" />
+      <indicator-card :backgroundImage="card3Image" title="技术需求" subTitle="成果转化" price="116" unit="项" />
+      <indicator-card :backgroundImage="card4Image" title="政策措施" subTitle="科技政策" price="36" unit="项" />
+      <indicator-card :backgroundImage="card5Image" title="经费支出" subTitle="R&D经费支出" price="10.42" unit="亿元" />
+      <indicator-card :backgroundImage="card6Image" title="企业" subTitle="企业培育" price="814" unit="家" />
+      <indicator-card :backgroundImage="card7Image" title="人才" subTitle="科技人才" price="767" unit="位" />
+      <indicator-card :backgroundImage="card8Image" title="创新平台" subTitle="创新平台" price="59" unit="个" />
+    </div>
+
+    <div class="policy-grid-container">
+      <policy-card yearMonth="2022-10" day="26" title="关于开展“专精特新”中小企业能力提升培育工作的通知"
+        description="关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知" />
+      <policy-card yearMonth="2022-10" day="26" title="关于开展“专精特新”中小企业能力提升培育工作的通知"
+        description="关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知" />
+      <policy-card yearMonth="2022-10" day="26" title="关于开展“专精特新”中小企业能力提升培育工作的通知"
+        description="关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知" />
+    </div>
+
+    <!-- <div ref="banner" class="banner content-item-block">
       <div class="video-wrapper">
-        
+
       </div>
       <h1 class="banner-title">
         激发创造 丰富生活
@@ -19,31 +39,23 @@
       </div>
     </div>
 
-    <!-- 产品 -->
     <div class="main">
       <div ref="product" class="product content-item-block">
         <h1 class="title">Inspire creativity, enrich life</h1>
         <div class="desc">截至目前，字节跳动产品已覆盖超过 150 个国家和地区，75 个语种</div>
         <ul class="product-list">
-          <li
-              class="product-item"
-              v-for="(item, key) in products"
-              :key="key"
-              @click="jumpToDetail(item)"
-          >
-            <img :src="item.logo" alt/>
+          <li class="product-item" v-for="(item, key) in products" :key="key" @click="jumpToDetail(item)">
+            <img :src="item.logo" alt />
             <div>{{ item.title }}</div>
           </li>
         </ul>
         <router-link to="/products">
           <div class="more">
-            <!-- <span class="more-button">了解更多</span> -->
             <bytedance-button size="large">了解更多</bytedance-button>
           </div>
         </router-link>
       </div>
 
-      <!-- 职位 -->
       <div class="job-category content-item-block">
         <h2 class="job-category-title title">探索你感兴趣的职位</h2>
         <ul class="job-category-list clearfix">
@@ -57,37 +69,23 @@
           </li>
         </ul>
       </div>
-
-      <!-- 字节范 -->
       <div class="byteStandard content-item-block">
         <h1 class="title">字节范</h1>
         <div class="desc">字节范是字节跳动企业文化的重要组成部分，是我们共同认可的行为准则</div>
         <div class="content">
           <div class="image">
-            <span
-                v-show="productLayerVisible"
-                class="layer"
-                @animationend="onScrollRightAnimationEnd"
-            ></span>
-            <img
-                v-if="byteStandards[byteStandardActiveIndex]"
-                style="width: 100%; height: 100%"
-                :src="byteStandards[byteStandardActiveIndex].image"
-                alt
-            />
+            <span v-show="productLayerVisible" class="layer" @animationend="onScrollRightAnimationEnd"></span>
+            <img v-if="byteStandards[byteStandardActiveIndex]" style="width: 100%; height: 100%"
+              :src="byteStandards[byteStandardActiveIndex].image" alt />
           </div>
           <div class="indicator">
             <ul>
               <li class="indicator-item" v-for="(item, index) in byteStandards" :key="index">
-                <h3
-                    :class="{ active: byteStandardActiveIndex === index }"
-                    @click="
-                  () => {
-                    byteStandardActiveIndex = index;
-                    productLayerVisible = true;
-                  }
-                "
-                >{{ item.title }}</h3>
+                <h3 :class="{ active: byteStandardActiveIndex === index }" @click="() => {
+                  byteStandardActiveIndex = index;
+                  productLayerVisible = true;
+                }
+                  ">{{ item.title }}</h3>
                 <p v-html="item.content" v-show="byteStandardActiveIndex === index"></p>
               </li>
             </ul>
@@ -95,7 +93,6 @@
         </div>
       </div>
 
-      <!-- 字节生活 -->
       <div class="byteLife content-item-block">
         <h1 class="byteLife-title">字节生活</h1>
         <div class="block-item block-item-one">
@@ -117,7 +114,7 @@
             </div>
           </div>
           <div class="block-item-column block-item-column-image">
-            <img src="https://sf3-ttcdn-tos.pstatp.com/obj/ttfe/ATSX/mainland/life_1.png" alt/>
+            <img src="https://sf3-ttcdn-tos.pstatp.com/obj/ttfe/ATSX/mainland/life_1.png" alt />
           </div>
         </div>
 
@@ -140,23 +137,18 @@
             </div>
           </div>
           <div class="block-item-column block-item-column-image">
-            <img src="https://sf3-ttcdn-tos.pstatp.com/obj/ttfe/ATSX/mainland/life_1.png" alt/>
+            <img src="https://sf3-ttcdn-tos.pstatp.com/obj/ttfe/ATSX/mainland/life_1.png" alt />
           </div>
         </div>
       </div>
 
-      <!-- 员工故事 -->
       <div class="staffStory content-item-block">
         <h2 class="title">员工故事</h2>
         <ul class="staffStory-list clearfix">
-          <router-link
-              :to="`/staff-stories/${item.id}`"
-              v-for="item in staffStories"
-              :key="item.id"
-              class="staffStory-item"
-          >
+          <router-link :to="`/staff-stories/${item.id}`" v-for="item in staffStories" :key="item.id"
+            class="staffStory-item">
             <div class="avatar">
-              <img style="width: 100%" :src="item.avatar" alt srcset/>
+              <img style="width: 100%" :src="item.avatar" alt srcset />
             </div>
             <div class="text">
               <h2 class="title">{{ item.title }}</h2>
@@ -168,18 +160,30 @@
         </ul>
       </div>
     </div>
+   -->
   </div>
 </template>
 
 <script setup>
-import {ref, reactive, getCurrentInstance, onMounted, onUnmounted} from "vue";
-import {watchScrollDirection} from "../../helper/utilities.js";
+import { ref, reactive, getCurrentInstance, onMounted, onUnmounted } from "vue";
+import { watchScrollDirection } from "../../helper/utilities.js";
 import EventBus from '../../helper/EventBus'
 import InputSearch from '../../components/Input-Search.vue'
 import BytedanceButton from '../../components/Bytedance-Button.vue'
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
+import IndicatorCard from '../../components/home/indicator-card/indicator-card.vue'
+import PolicyCard from '../../components/home/policy-card/policy-card.vue'
+import card1Image from '../../assets/images/1.png'
+import card2Image from '../../assets/images/2.png'
+import card3Image from '../../assets/images/3.png'
+import card4Image from '../../assets/images/4.png'
+import card5Image from '../../assets/images/5.png'
+import card6Image from '../../assets/images/6.png'
+import card7Image from '../../assets/images/7.png'
+import card8Image from '../../assets/images/8.png'
 
-const {proxy} = getCurrentInstance()
+
+const { proxy } = getCurrentInstance()
 const router = useRouter()
 const productLayerVisible = ref(false)
 
@@ -267,7 +271,7 @@ const onScrollRightAnimationEnd = () => {
 
 onMounted(() => {
   EventBus.emit("home-scrolling",
-      {x: document.body.scrollLeft, y: document.body.scrollTop}
+    { x: document.body.scrollLeft, y: document.body.scrollTop }
   )
   getProductList()
   getJobCategory()
@@ -299,13 +303,27 @@ const getProductList = async () => {
 </script>
 
 <style scoped lang="less">
+.indicator-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+.policy-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+}
+
 @keyframes verticalMotion {
   0% {
     transform: translateY(6px);
   }
+
   50% {
     transform: translateY(-6px);
   }
+
   100% {
     transform: translateY(6px);
   }
@@ -367,14 +385,15 @@ const getProductList = async () => {
     text-align: center;
 
     .subTitle {
+
       &::after,
       &::before {
         content: "";
         position: absolute;
         background-image: linear-gradient(270deg,
-        hsla(0, 0%, 100%, 0),
-        #fff 47%,
-        hsla(0, 0%, 100%, 0));
+            hsla(0, 0%, 100%, 0),
+            #fff 47%,
+            hsla(0, 0%, 100%, 0));
         height: 2px;
         width: 89px;
         top: 50%;
@@ -548,7 +567,7 @@ const getProductList = async () => {
         box-shadow: 0 0 8px 1px #ccc;
         background-size: 110%;
 
-        & + .name {
+        &+.name {
           color: @main-color;
         }
       }
@@ -637,6 +656,7 @@ const getProductList = async () => {
 
 // 字节生活
 .byteLife {
+
   // width:1200px;
   // overflow: hidden;
   &-title {
