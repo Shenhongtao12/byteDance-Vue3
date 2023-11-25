@@ -6,14 +6,14 @@
             <div class="sub-title">{{ subTitle }}</div>
         </div>
         <div class="description">
-            <span class="price">{{ price }}</span>
+            <span class="price" :style="color">{{ price }}</span>
             <span class="unit">{{ unit }}</span>
         </div>
     </div>
 </template>
   
 <script setup>
-import { defineProps, toRefs } from 'vue'
+import { defineProps, toRefs, ref } from 'vue'
 
 const props = defineProps({
     backgroundImage: {
@@ -32,6 +32,10 @@ const props = defineProps({
         type: String,
         required: true
     },
+    priceColor: {
+        type: String,
+        required: true
+    },
     unit: {
         type: String,
         required: true
@@ -39,7 +43,11 @@ const props = defineProps({
 })
 
 
-const { backgroundImage, title, price, unit, subTitle } = toRefs(props)
+const { backgroundImage, title, price, unit, subTitle, priceColor } = toRefs(props)
+
+const color = ref({
+    color: priceColor
+})
 
 </script>
   
@@ -58,13 +66,13 @@ const { backgroundImage, title, price, unit, subTitle } = toRefs(props)
 }
 
 .title {
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 16px;
 }
 
 .vertical-line {
-    width: 3px;
-    height: 16px;
+    width: 2px;
+    height: 15px;
     background-color: #000;
     margin: 0 10px;
 }
@@ -79,10 +87,11 @@ const { backgroundImage, title, price, unit, subTitle } = toRefs(props)
 
 .price {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 22px;
 }
 
 .unit {
     font-size: 14px;
+    margin-left: 10px;
 }
 </style>

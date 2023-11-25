@@ -1,7 +1,6 @@
 <template>
   <div id="container">
     <Header
-        @enter.enter="onAnimationStart"
         :fixedToTop="$route.path === '/'"
         ref="header"
         theme-color="main-color"

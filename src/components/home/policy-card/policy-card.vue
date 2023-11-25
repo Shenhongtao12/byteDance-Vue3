@@ -9,12 +9,15 @@
         </div>
         <div class="description">{{ description }}</div>
         <div class="footer">
-            <button class="detail-button">查看详情</button>
+            <el-button color="#D6E6F3" size="small">
+                <span style="color: #0062A8;">查看详情&nbsp;</span><el-icon color="#0062A8"><Right /></el-icon>
+            </el-button>
         </div>
     </div>
 </template>
 
 <script setup>
+import { Right } from '@element-plus/icons-vue';
 import { defineProps, toRefs } from 'vue'
 
 const props = defineProps({
@@ -51,8 +54,8 @@ const { yearMonth, day, title, description } = toRefs(props)
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-    background-color: #ffeaf1;
+    margin-bottom: 20px;
+    background-color: #D6E6F3;
     padding: 6px 12px;
 }
 
@@ -62,34 +65,36 @@ const { yearMonth, day, title, description } = toRefs(props)
     display: flex;
     flex-direction: column;
     color: white;
-    width: 20%;
+    width: 35%;
     align-items: center;
     margin-right: 16px;
 }
 
 .year-month {
-    background-color: #ff2961;
+    background-color: #0062A8;
     font-size: 14px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     padding: 4px 8px;
     width: 100%;
     text-align: center;
+    font-size: 12px;
 }
 
 .day {
-    background-color: #ff709e;
+    background-color: #639ED2;
     text-align: center;
     font-size: 18px;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
     padding: 4px 8px;
     width: 100%;
+    font-size: 24px;
 }
 
 .title {
     font-size: 16px;
-    font-weight: bold;
+    /* font-weight: 500; */
     line-height: 1.2;
     max-height: 2.4em;
     overflow: hidden;
@@ -97,11 +102,11 @@ const { yearMonth, day, title, description } = toRefs(props)
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    color: blue;
+    color: #0062A8;
 }
 
 .description {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.4;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -112,21 +117,14 @@ const { yearMonth, day, title, description } = toRefs(props)
     padding-right: 12px;
     padding-top: 0px;
     padding-bottom: 0px;
+    color: #666666;
 }
 
 .footer {
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
+    padding: 6px 15px 10px 0;
 }
 
-.detail-button {
-    padding: 6px 12px;
-    font-size: 14px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-}
 </style>
