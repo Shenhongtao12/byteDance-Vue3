@@ -27,6 +27,19 @@ export default defineConfig({
             resolvers: [ElementPlusResolver()],
         }),
     ],
+    // vite 相关配置
+    server: {
+        port: 5173,
+        host: true,
+        open: true,
+        proxy: {
+          '/dev-api': {
+            target: 'http://localhost:8080',
+            changeOrigin: true,
+            rewrite: (p) => p.replace(/^\/dev-api/, '')
+          }
+        }
+      },
 
     css: {
         preprocessorOptions: {

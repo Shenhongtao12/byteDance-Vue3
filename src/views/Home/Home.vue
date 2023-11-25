@@ -1,18 +1,19 @@
 <template>
   <div class="home">
+    <div>
+      <Carousel />
+    </div>
     <div class="width1200">
       <part-title title="新闻动态" />
-      <news-card :news="news" :image="card1Image"></news-card>
+      <news-card v-if="newsTrendsList.length > 0" :news="newsTrendsList" :imageUrl="imageUrl"></news-card>
     </div>
     <div class="width1200">
       <part-title title="政策举措" />
-      <div class="policy-grid-container">
-        <policy-card yearMonth="2022-10" day="26" title="关于开展“专精特新”中小企业能力提升培育工作的通知"
-          description="关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知" />
-        <policy-card yearMonth="2022-10" day="26" title="关于开展“专精特新”中小企业能力提升培育工作的通知"
-          description="关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知" />
-        <policy-card yearMonth="2022-10" day="26" title="关于开展“专精特新”中小企业能力提升培育工作的通知"
-          description="关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知关于开展“专精特新”中小企业能力提升培育工作的通知" />
+      <div class="policy-grid-container" v-if="policyInitiativeList.length > 0">
+        <div v-for="(item, index) in policyInitiativeList" :key="index">
+          <policy-card :yearMonth="parseTime(item.releaseDate, '{y}-{m}')" :day="parseTime(item.releaseDate, '{d}')" :title="item.title"
+          :description="item.content" />
+        </div>
       </div>
     </div>
     <div class="width1200">
@@ -44,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="base-card-box " :style="{ backgroundImage: `url('${homeBaseCardImage}')` }">
+    <div class="base-card-box" :style="{ backgroundImage: `url('${homeBaseCardImage}')` }">
       <div class="width1200">
         <el-row>
           <el-col :span="10" :offset="1">
@@ -56,13 +57,12 @@
           </el-col>
           <el-col :span="1"></el-col>
         </el-row>
-        
-        
       </div>
     </div>
   </div>
-  <div>
-    五库信息检索区
+  <div class="width1200">
+      <part-title title="信息检索区" />
+
   </div>
 </template>
 
@@ -76,6 +76,7 @@ import PartTitle from '../../components/home/part-title/part-title.vue'
 import NewsCard from '../../components/home/news-card/news.card.vue'
 import FeatureCard from '../../components/home/feature-card/feature-card.vue'
 import BaseCard from '../../components/home/base-card/base-card.vue'
+import Carousel from '../../components/home/carousel/carousel.vue'
 import card1Image from '../../assets/images/1.png'
 import card2Image from '../../assets/images/2.png'
 import card3Image from '../../assets/images/3.png'
@@ -86,67 +87,46 @@ import card7Image from '../../assets/images/7.png'
 import card8Image from '../../assets/images/8.png'
 import homeBaseCardImage from '../../assets/images/home-base-card-image.png'
 import { listNewsTrends } from "../../api/system/newsTrends";
-
-const news = [{
-  title: '两端发力、全程护航、入选省级示范机构',
-  date: '2023-11-15',
-  url: '1',
-}, {
-  title: '两端发力、全程护航、入选---------------------------省级示范机构',
-  date: '2023-11-15',
-  url: '2',
-}, {
-  title: '两端发力、全程护航、入选省级示范机构',
-  date: '2023-11-15',
-  url: '3',
-}, {
-  title: '两端发力、全程护航、入选省级示范机构',
-  date: '2023-11-15',
-  url: '4',
-}, {
-  title: '两端发力、全程护航、入选省级示范机构',
-  date: '2023-11-15',
-  url: '5',
-}, {
-  title: '两端发力、全程护航、入选省级示范机构',
-  date: '2023-11-15',
-  url: '6',
-}]
+import { listPolicyInitiative } from "../../api/system/policyInitiative";
 
 const { proxy } = getCurrentInstance()
 const router = useRouter()
-const productLayerVisible = ref(false)
 
 const queryParams = ref({
     pageNum: 1,
-    pageSize: 10,
+    pageSize: 6,
     title: null,
-    columnname: null,
-    source: null,
-    author: null,
-    content: null,
-    keyword: null,
-    showFlag: null,
+    showFlag: '是',
     params: {
       userSort: true
     }
-  });
+});
+const newsTrendsList = ref([]);
+const policyInitiativeList = ref([]);
+const imageUrl = ref("");
 /** 查询newsTrends列表 */
-function getList() {
-  loading.value = true;
+function getNewsList() {
+  queryParams.value.pageSize = 6;
   listNewsTrends(queryParams.value).then(response => {
     newsTrendsList.value = response.rows;
-    total.value = response.total;
-    loading.value = false;
+    imageUrl.value =response.rows[0].coverUrl;
   });
 }
-getList();
+function getPolicyInitiative() {
+  queryParams.value.pageSize = 3;
+  listPolicyInitiative(queryParams.value).then(res => {
+    policyInitiativeList.value = res.rows;
+  })
+}
+getNewsList();
+getPolicyInitiative();
 </script>
 
 <style scoped lang="less">
 .base-card-box {
+  margin-top: 65px;
   // height: 329px;
-  padding: 60px;
+  padding: 50px 60px;
   background-size: 100% 100%;
   display: flex;
   grid-gap: 127px
@@ -189,11 +169,7 @@ getList();
 .policy-grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 40px;
-}
-
-.home {
-  
+  grid-gap: 35px;
 }
 
 </style>

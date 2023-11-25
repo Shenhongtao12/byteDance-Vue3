@@ -30,7 +30,7 @@ const { title } = toRefs(props);
 .title-component {
     display: flex;
     align-items: center;
-    margin: 25px 40px;
+    margin: 40px 40px;
 }
 
 .line {

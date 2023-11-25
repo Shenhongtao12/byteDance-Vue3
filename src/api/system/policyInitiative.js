@@ -16,29 +16,3 @@ export function getPolicyInitiative(id) {
     method: 'get'
   })
 }
-
-// 新增policyInitiative
-export function addPolicyInitiative(data) {
-  return request({
-    url: '/system/policyInitiative',
-    method: 'post',
-    data: data
-  })
-}
-
-// 修改policyInitiative
-export function updatePolicyInitiative(data) {
-  return request({
-    url: '/system/policyInitiative',
-    method: 'put',
-    data: data
-  })
-}
-
-// 删除policyInitiative
-export function delPolicyInitiative(id) {
-  return request({
-    url: '/system/policyInitiative/' + id,
-    method: 'delete'
-  })
-}

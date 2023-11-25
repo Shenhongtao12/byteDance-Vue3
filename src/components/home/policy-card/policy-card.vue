@@ -44,6 +44,7 @@ const { yearMonth, day, title, description } = toRefs(props)
   
 <style scoped>
 .home-policy-card {
+    width: 375px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-shadow: #ff2961;
@@ -65,7 +66,7 @@ const { yearMonth, day, title, description } = toRefs(props)
     display: flex;
     flex-direction: column;
     color: white;
-    width: 35%;
+    width: 25%;
     align-items: center;
     margin-right: 16px;
 }
@@ -94,6 +95,7 @@ const { yearMonth, day, title, description } = toRefs(props)
 
 .title {
     font-size: 16px;
+    width: 75%;
     /* font-weight: 500; */
     line-height: 1.2;
     max-height: 2.4em;
