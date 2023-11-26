@@ -18,7 +18,7 @@
 
 <script setup>
 import { Right } from '@element-plus/icons-vue';
-import { defineProps, toRefs } from 'vue'
+import { toRefs } from 'vue'
 
 const props = defineProps({
     yearMonth: {

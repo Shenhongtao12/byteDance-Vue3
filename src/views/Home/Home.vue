@@ -60,9 +60,11 @@
       </div>
     </div>
   </div>
-  <div class="width1200">
+  <div class="width1200" style="margin-bottom: 50px;">
       <part-title title="信息检索区" />
-
+      <div>
+        <WukuInfo/>
+      </div>
   </div>
 </template>
 
@@ -76,7 +78,8 @@ import PartTitle from '../../components/home/part-title/part-title.vue'
 import NewsCard from '../../components/home/news-card/news.card.vue'
 import FeatureCard from '../../components/home/feature-card/feature-card.vue'
 import BaseCard from '../../components/home/base-card/base-card.vue'
-import Carousel from '../../components/home/carousel/carousel.vue'
+import Carousel from '../../components/home/carousel/carousel.vue';
+import WukuInfo from '../../components/home/wuku-info/wuku-info.vue'
 import card1Image from '../../assets/images/1.png'
 import card2Image from '../../assets/images/2.png'
 import card3Image from '../../assets/images/3.png'

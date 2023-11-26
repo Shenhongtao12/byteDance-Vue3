@@ -66,7 +66,6 @@
 
 <script setup>
 import {
-  defineProps,
   toRefs,
   ref,
   onMounted,
