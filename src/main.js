@@ -18,8 +18,8 @@ app.config.globalProperties.addDateRange = addDateRange
 
 app.use(router).use(store)
 app.use(ElementPlus, {
-    locale: zhCn,
-  })
+  locale: zhCn,
+})
 
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

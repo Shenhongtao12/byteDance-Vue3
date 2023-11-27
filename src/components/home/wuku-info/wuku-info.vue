@@ -3,23 +3,25 @@
     <div class="filter">
       <div class="type">
         <span class="title">所属地区</span>
-        <span
-          class="tags"
-          v-for="(button, index) in buttons"
-          :key="button.key"
-          :class="{ 'select-button': button.clicked }"
-          @click="setClicked(index)"
-          link
-        >
-          {{ button.text }}
-        </span>
+        <div style="display: flex; flex-wrap: wrap">
+          <span
+            class="tags"
+            v-for="(diqu, index) in selectConfigList"
+            :key="index"
+            :class="{ 'select-button': diqu.clicked }"
+            @click="setClicked(index)"
+            link
+          >
+            {{ diqu.text }}
+          </span>
+        </div>
       </div>
       <div class="type">
         <span class="title">资源标签</span>
         <span
           class="tags"
           v-for="(button, index) in wukuType"
-          :key="button.key"
+          :key="index"
           :class="{ 'select-button': button.clicked }"
           @click="setClickedType(index)"
           link
@@ -30,13 +32,139 @@
     </div>
     <div>
       <el-table
+        v-loading="loading"
         :data="tableData"
         :row-class-name="tableRowClassName"
-        style="width: 100%"
+        style="width: 100%; min-height: 200px;"
       >
-        <el-table-column prop="date" label="Date" width="180" />
-        <el-table-column prop="name" label="Name" width="180" />
-        <el-table-column prop="address" label="Address" />
+      <!-- 技术需求 -->
+      <el-table-column v-if="lastSelectType == 0" label="项目名称" prop="name">
+        <template #default="scope">
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            :content="scope.row.name"
+            placement="top"
+          >
+            <div class="cell-content wordTitle">
+              {{ scope.row.name }}
+            </div>
+          </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 0" label="产业领域" prop="industryField" />
+      <el-table-column v-if="lastSelectType == 0" min-width="100" label="项目内容" prop="content">
+        <template #default="scope">
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            :content="scope.row.content"
+            placement="top"
+          >
+            <div class="cell-content">
+              {{ scope.row.content }}
+            </div>
+          </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 0" label="需求单位" prop="reqEnterprise" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 0" label="所属地区" prop="district" />
+
+      <!-- 技术研究项目 -->
+      <el-table-column v-if="lastSelectType == 1" label="项目名称" prop="name">
+        <template #default="scope">
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            :content="scope.row.name"
+            placement="top"
+          >
+            <div class="cell-content wordTitle">
+              {{ scope.row.name }}
+            </div>
+          </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" label="产业领域" prop="industryField" />
+      <el-table-column v-if="lastSelectType == 1" min-width="100" label="项目内容" width="200" prop="content">
+        <template #default="scope">
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            :content="scope.row.content"
+            placement="top"
+          >
+            <div class="cell-content">
+              {{ scope.row.content }}
+            </div>
+          </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" label="项目承担单位" prop="undertakeEnterprise" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" label="所属地区" prop="district" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" label="级别" prop="level" />
+
+      <!-- 重大成果 -->
+      <el-table-column v-if="lastSelectType == 2" label="名称" prop="name">
+        <template #default="scope">
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            :content="scope.row.name"
+            placement="top"
+          >
+            <div class="cell-content wordTitle">
+              {{ scope.row.name }}
+            </div>
+          </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column v-if="lastSelectType == 2" min-width="100" label="整体概述" prop="overallOverview">
+        <template #default="scope">
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            :content="scope.row.overallOverview"
+            placement="top"
+          >
+            <div class="cell-content">
+              {{ scope.row.overallOverview }}
+            </div>
+          </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column v-if="lastSelectType == 2" min-width="100" label="具体成效" prop="content">
+        <template #default="scope">
+          <el-tooltip
+            class="box-item"
+            effect="dark"
+            :content="scope.row.content"
+            placement="top"
+          >
+            <div class="cell-content">
+              {{ scope.row.content }}
+            </div>
+          </el-tooltip>
+        </template>
+      </el-table-column>
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 2" label="委托单位" prop="entrustEnterprise" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 2" label="所属地区" prop="district" />
+      <!-- 人才 -->
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" class="wordTitle" label="姓名" prop="name" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="年龄" prop="age" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="性别" prop="sex" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="单位" prop="enterprise" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="所属地区" prop="district" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="职级" prop="level" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="产业领域" prop="domain" />
+      <!-- 基金 -->
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" class="wordTitle" label="名称" prop="name" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" label="类别" prop="classify" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" label="所属单位" prop="enterprise" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" label="所属地区" prop="district" />
+
+      <el-table-column :show-overflow-tooltip="true" label="联系人" prop="contact" />
+      <el-table-column :show-overflow-tooltip="true" label="联系方式" prop="phone" />
       </el-table>
     </div>
     <div class="page">
@@ -54,33 +182,76 @@
 <script setup>
 import { ref } from "vue";
 import Pagination from "@/components/Pagination";
+import { listSelectConfig } from "@/api/system/selectConfig";
+import {
+  listAchievement,
+  listFoundation,
+  listProject,
+  listRequirement,
+  listTalents,
+} from "@/api/system/wuku";
 
-const total = ref(10);
+const total = ref(0);
 const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
+  district: null,
 });
 
-const buttons = ref([
-  { type: "", text: "全部", clicked: true },
-  { type: "awef", text: "榆林区", clicked: false },
-  { type: "primary", text: "衡山去", clicked: false },
-  { type: "success", text: "神木市", clicked: false },
-  { type: "info", text: "定边县", clicked: false },
-  { type: "warning", text: "佳县", clicked: false },
-  { type: "danger", text: "府谷县", clicked: false },
+const loading = ref(false);
+const selectConfigList = ref([
+  {
+    text: "全部",
+    clicked: true
+  }
 ]);
 
 const wukuType = ref([
-  { type: "全部", text: "全部", clicked: true },
-  { type: "技术需求", text: "技术需求", clicked: false },
-  { type: "技术研究项目", text: "技术研究项目", clicked: false },
-  { type: "重大成果", text: "重大成果", clicked: false },
-  { type: "人才", text: "人才", clicked: false },
-  { type: "基金", text: "基金", clicked: false },
+  { text: "技术需求", clicked: true },
+  { text: "技术研究项目", clicked: false },
+  { text: "重大成果", clicked: false },
+  { text: "人才", clicked: false },
+  { text: "基金", clicked: false },
 ]);
 
-function getList() {}
+function getList() {
+  loading.value = true;
+  const district = selectConfigList.value[lastSelectDiQu.value].text;
+  queryParams.value.district = district == "全部" ? null : district;
+  const type = wukuType.value[lastSelectType.value];
+  switch (type.text) {
+    case "技术需求":
+      listRequirement(queryParams.value).then((res) => {
+        tableData.value = res.rows;
+        total.value = res.total;
+      });
+      break;
+    case "技术研究项目":
+      listProject(queryParams.value).then((res) => {
+        tableData.value = res.rows;
+        total.value = res.total;
+      });
+      break;
+    case "重大成果":
+      listAchievement(queryParams.value).then((res) => {
+        tableData.value = res.rows;
+        total.value = res.total;
+      });
+      break;
+    case "人才":
+      listTalents(queryParams.value).then((res) => {
+        tableData.value = res.rows;
+        total.value = res.total;
+      });
+      break;
+    case "基金":
+      listTalents(queryParams.value).then((res) => {
+        tableData.value = res.rows;
+        total.value = res.total;
+      });
+  }
+  loading.value = false;
+}
 
 const tableRowClassName = ({ row, rowIndex }) => {
   if (rowIndex % 2 == 1) {
@@ -88,28 +259,7 @@ const tableRowClassName = ({ row, rowIndex }) => {
   }
   return "";
 };
-const tableData = [
-  {
-    date: "2016-05-03",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-02",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-04",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-01",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-];
+const tableData = ref([]);
 
 const lastSelectDiQu = ref(0);
 const lastSelectType = ref(0);
@@ -117,10 +267,13 @@ const lastSelectType = ref(0);
 //所属地区
 function setClicked(index) {
   if (lastSelectDiQu.value != null) {
-    buttons.value[lastSelectDiQu.value].clicked = false;
+    selectConfigList.value[lastSelectDiQu.value].clicked = false;
   }
-  buttons.value[index].clicked = true;
+  selectConfigList.value[index].clicked = true;
   lastSelectDiQu.value = index;
+
+  queryParams.value.pageNum = 1;
+  getList();
 }
 // 资源标签
 function setClickedType(index) {
@@ -129,7 +282,31 @@ function setClickedType(index) {
   }
   wukuType.value[index].clicked = true;
   lastSelectType.value = index;
+
+  queryParams.value.pageNum = 1;
+  getList();
 }
+/** 查询selectConfig列表 */
+function getDiquList() {
+  const queryParams = {
+    pageNum: 1,
+    pageSize: 5000,
+    type: "五库管理-所属地区",
+  };
+  listSelectConfig(queryParams).then((response) => {
+    for (let res of response.rows) {
+      selectConfigList.value.push({
+        text: res.value,
+        clicked: false,
+      });
+    }
+    if (selectConfigList.value.length > 0) {
+      selectConfigList.value[0].clicked = true;
+    }
+    getList();
+  });
+}
+getDiquList();
 </script>
 <style scoped>
 .filter {
@@ -151,9 +328,10 @@ function setClickedType(index) {
   font-weight: 550;
   margin-left: 15px;
   margin-right: 15px;
+  min-width: 64px;
 }
 .tags {
-    font-size: 15px;
+  font-size: 15px;
   line-height: 32px;
   text-align: center;
   margin: 0 6px;
@@ -165,6 +343,18 @@ function setClickedType(index) {
   background-color: #0062a8;
   color: #fff;
 }
+.cell-content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.wordTitle {
+  color: #0062A8;
+}
 </style>
 <style>
 .el-table .warning-row {
@@ -172,6 +362,7 @@ function setClickedType(index) {
 }
 .el-table thead th {
   background-color: #d6e6f3 !important;
+  color: #333333;
 }
 .el-card__body {
   padding: 0;

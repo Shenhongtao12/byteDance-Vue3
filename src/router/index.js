@@ -1,16 +1,34 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
     {
+        path: "/:catchAll(.*)",
+        name: "notFound",
+        component: () => import('@/views/error/404.vue'),
+        hidden: true
+    },
+    {
         path: '/',
         name: 'home',
-        component: () => import('../views/Home/Home.vue')
+        redirect: '/home',
+        component: () => import('@/views/layout/index.vue'),
+        meta: { title: '榆林专区' },
+        children: [
+            {
+                path: '/home',
+                component: () => import('@/views/Home/Home.vue'),
+                name: 'home',
+                meta: { title: '榆林专区' }
+            },
+            {
+                path: '/xinwen',
+                name: 'xinwen',
+                component: () => import('../views/xinwen/xinwen-list.vue'),
+                meta: { title: '新闻资讯' }
+            },
+        ]
     },
-    // {
-    //     path: '/jobs',
-    //     name: 'jobs',
-    //     component: () => import('../views/Jobs/Jobs.vue')
-    // },
+
     // {
     //   path: '/jobs/:id',
     //   name: 'jobDetail',
@@ -44,7 +62,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes
 })
 
