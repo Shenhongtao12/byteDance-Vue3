@@ -16,3 +16,12 @@ export function getNewsTrends(id) {
     method: 'get'
   })
 }
+
+// 修改newsTrends
+export function viewNewsTrends(data) {
+  return request({
+    url: '/system/newsTrends/view',
+    method: 'put',
+    data: data
+  })
+}

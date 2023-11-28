@@ -23,7 +23,7 @@
                         <div class="date">{{ parseTime(item.releaseDate, '{y}-{m}-{d}') }}</div>
                     </div>
                     <div class="button-box">
-                        <el-button color="#C2A341" size="small">
+                        <el-button color="#C2A341" size="small" @click="goList">
                             <span style="color: #fff;">查看更多&nbsp;</span><el-icon color="#fff"><Right /></el-icon>
                         </el-button>
                     </div>
@@ -36,8 +36,11 @@
 <script setup>
 import { toRefs, ref, onMounted } from 'vue'
 import { Picture as IconPicture } from '@element-plus/icons-vue'
+import { useRouter } from "vue-router";
 
 const baseUrl = import.meta.env.VITE_APP_BASE_API;
+
+const router = useRouter();
 
 const props = defineProps({
     news: {
@@ -57,6 +60,10 @@ const image = ref({
 
 const { news, imageUrl } = toRefs(props);
 
+function goList() {
+    router.push('/xinwen');
+}
+
 onMounted(() => {
     image.value = {
         url: baseUrl + imageUrl.value,
@@ -73,7 +80,7 @@ const handleMouseOver = (item) => {
 };
 
 function openNews(id) {
-    console.log(id)
+    router.push('/xinwenxiangqing/' + id);
 }
 </script>
   

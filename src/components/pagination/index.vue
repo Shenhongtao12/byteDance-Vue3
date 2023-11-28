@@ -10,6 +10,7 @@
       :total="total"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      class="custom-pagination"
     />
   </div>
 </template>
@@ -97,10 +98,15 @@ function handleCurrentChange(val) {
 
 <style scoped>
 .pagination-container {
-  background: #fff;
-  padding: 32px 16px;
+  /* background: #fff;
+  padding: 32px 16px; */
 }
 .pagination-container.hidden {
   display: none;
+}
+</style>
+<style>
+.custom-pagination .el-pager li.is-active {
+  background-color: #0062A8 !important; /* 自定义选中页码的背景色 */
 }
 </style>

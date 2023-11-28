@@ -315,6 +315,7 @@ getDiquList();
 .page {
   display: flex;
   justify-content: end;
+  padding: 25px 16px;
 }
 .type {
   display: flex;
@@ -358,10 +359,10 @@ getDiquList();
 </style>
 <style>
 .el-table .warning-row {
-  --el-table-tr-bg-color: #d6e6f3;
+  --el-table-tr-bg-color: rgba(0,98,168,.05);
 }
 .el-table thead th {
-  background-color: #d6e6f3 !important;
+  background-color: rgba(0,98,168,.05) !important;
   color: #333333;
 }
 .el-card__body {

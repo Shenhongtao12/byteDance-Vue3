@@ -58,21 +58,6 @@
           <router-link to="/login" v-slot="{ href, navigate, isActive }">
             <li class="navbar-item" :class="{ active: isActive }">
               <a v-if="!username" :href="href" @click="navigate">登录</a>
-              <el-dropdown v-if="username">
-                <span class="el-dropdown-link">
-                  {{ username }}
-                  <el-icon class="el-icon--right">
-                    <arrow-down />
-                  </el-icon>
-                </span>
-                <template #dropdown>
-                  <el-dropdown-menu>
-                    <el-dropdown-item>个人简历</el-dropdown-item>
-                    <el-dropdown-item>应聘记录</el-dropdown-item>
-                    <el-dropdown-item @click="logout">退出</el-dropdown-item>
-                  </el-dropdown-menu>
-                </template>
-              </el-dropdown>
             </li>
           </router-link>
         </div>

@@ -25,14 +25,15 @@ const router = useRouter();
 // 生成数组数据
 const breadcrumbData = ref([]);
 const getBreadcrumbData = () => {
-  console.log(route.matched);
   // 在面包屑最前面添加链接到秦创原首页
-  const shouye = [{
-    meta: {
-        title: "首页"
+  const shouye = [
+    {
+      meta: {
+        title: "首页",
+      },
+      path: "https://www.qinchuangyuan.com/html/web/index.html",
     },
-    path: "https://www.qinchuangyuan.com/html/web/index.html"
-  }]
+  ];
   const routeList = route.matched.filter((item) => {
     return item.meta && item.meta.title;
   });
@@ -51,22 +52,25 @@ watch(
 );
 // 处理点击事件
 const onLinkClick = (item) => {
-    if (item.path.startsWith("http")) {
-        window.location.href = item.path;
-        return;
-    }
+  if (item.path.startsWith("http")) {
+    window.location.href = item.path;
+    return;
+  }
   router.push(item.path);
 };
 </script>
 <style lang="scss" scoped>
 .breadcrumb {
+  margin: auto;
+  width: 1200px;
   display: flex;
   font-size: 14px;
-  line-height: 50px;
-  margin-left: 8px;
+  line-height: 32px;
+  padding: 20px 0 10px;
   .no-redirect {
-    color: #97a8be;
+    color: #0062A8;
     cursor: text;
+    font-weight: 550;
   }
 }
 </style>

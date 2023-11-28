@@ -21,10 +21,36 @@ const routes = [
                 meta: { title: '榆林专区' }
             },
             {
-                path: '/xinwen',
-                name: 'xinwen',
-                component: () => import('../views/xinwen/xinwen-list.vue'),
-                meta: { title: '新闻资讯' }
+                path: '/content',
+                name: 'content',
+                redirect: '/xinwen',
+                component: () => import('@/views/layout/content.vue'),
+                children: [
+                    {
+                        path: '/xinwen',
+                        name: 'xinwen',
+                        component: () => import('@/views/xinwen/xinwen-list.vue'),
+                        meta: { title: '新闻资讯' },
+                    },
+                    {
+                        path: '/xinwenxiangqing/:id(\\d+)',
+                        name: 'xinwenDetail',
+                        component: () => import('@/views/xinwen/xinwen-info.vue'),
+                        meta: { title: '新闻详情' }
+                    },
+                    {
+                        path: '/zhengce',
+                        name: 'zhengce',
+                        component: () => import('@/views/zhengce/zhengce-list.vue'),
+                        meta: { title: '政策举措' },
+                    },
+                    {
+                        path: '/zhengcexiangqing',
+                        name: 'zhengcexiangqing',
+                        component: () => import('@/views/zhengce/zhengce-list.vue'),
+                        meta: { title: '政策详情' },
+                    },
+                ]
             },
         ]
     },
@@ -32,32 +58,22 @@ const routes = [
     // {
     //   path: '/jobs/:id',
     //   name: 'jobDetail',
-    //   component: () => import('../views/JobDetail/JobDetail.vue')
+    //   component: () => import('@/views/JobDetail/JobDetail.vue')
     // },
     // {
     //     path: '/staff-stories/:id',
     //     name: 'staff-stories',
-    //     component: () => import('../views/StaffStories/StaffStories.vue')
+    //     component: () => import('@/views/StaffStories/StaffStories.vue')
     // },
     // {
     //     path: '/products',
     //     name: 'products',
-    //     component: () => import('../views/Products/Products.vue')
+    //     component: () => import('@/views/Products/Products.vue')
     // },
     // {
     //     path: '/user',
     //     name: 'user',
-    //     component: () => import('../views/User/User.vue')
-    // },
-    // {
-    //     path: '/login',
-    //     name: 'login',
-    //     component: () => import('../views/Login/Login.vue')
-    // },
-    // {
-    //     path: '/test',
-    //     name: 'test',
-    //     component: () => import('../views/Test/index.vue')
+    //     component: () => import('@/views/User/User.vue')
     // }
 ]
 

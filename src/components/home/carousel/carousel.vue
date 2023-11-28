@@ -19,10 +19,10 @@
       <!-- 图片上层内容 -->
       <div class="bannerTextBox">
         <div class="bannerText">
-          <span class="title">{{title}}</span>
+          <span class="title">{{ title }}</span>
           <div class="content">
             <div>
-                {{ content }}
+              {{ content }}
             </div>
           </div>
         </div>
@@ -35,6 +35,7 @@
           v-for="(item, index) in slideList.length"
           :class="{ active: index === currentIndex }"
           @mouseover="change(index)"
+          @mouseleave="go()"
         >
         </span>
       </div>
@@ -62,10 +63,9 @@ function getList() {
   listCarousel(queryParams).then((response) => {
     slideList.value = response.rows;
     if (response.rows && response.rows.length > 0) {
-        title.value = response.rows[0].title;
-        content.value = response.rows[0].content;
+      title.value = response.rows[0].title;
+      content.value = response.rows[0].content;
     }
-     
   });
 }
 
@@ -88,7 +88,8 @@ function go() {
 function change(index) {
   currentIndex.value = index;
   title.value = slideList.value[index].title;
-content.value = slideList.value[index].content;
+  content.value = slideList.value[index].content;
+  stop();
 }
 
 onMounted(() => {
@@ -142,14 +143,14 @@ a {
   max-height: 200px;
   width: 700px;
 }
-.bannerText .content div{
-    /* padding: 16px 20px; */
-    line-height: 30px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical; /* 垂直堆叠内容 */
-    -webkit-line-clamp: 5; /* 最多显示的行数 */
-    word-wrap: break-word; /* 单词换行 */
+.bannerText .content div {
+  /* padding: 16px 20px; */
+  line-height: 30px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical; /* 垂直堆叠内容 */
+  -webkit-line-clamp: 5; /* 最多显示的行数 */
+  word-wrap: break-word; /* 单词换行 */
 }
 .bannerItems {
   position: absolute;
