@@ -1,22 +1,79 @@
 <template>
     <div class="body">
-        <div class="header">
-            3365战略
+        <div class="header" :style="{ backgroundImage: `url('${headerBg}')` }">
+            <div class="header-body">
+                <div class="header-title">
+                    榆林x 秦创原‘3365’战略
+                </div>
+                <div class="header-list">
+                    <div>
+                        <el-image class="header-img" style="height: 100px;" :src="headerList1"></el-image>
+                        <div class="header-text">
+                            三大工程
+                        </div>
+                    </div>
+                    <div>
+                        <el-image class="header-img" style="height: 82px;" :src="headerList2"></el-image>
+                        <div class="header-text">
+                            三项机制
+                        </div>
+                    </div>
+                    <div>
+                        <el-image class="header-img" style="height: 82px;" :src="headerList3"></el-image>
+                        <div class="header-text">
+                            六抓六确保
+                        </div>
+                    </div>
+                    <div>
+                        <el-image class="header-img" style="height: 88px;" :src="headerList4"></el-image>
+                        <div class="header-text">
+                            科技五环
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="width1200">
             <div class="title">
                 <el-image class="img" :src="titleBackgroundImage"  fit="cover"></el-image>
                 <div class="text">三大工程</div>
             </div>
-            <div class="gongcheng">
+            <div class="gongcheng" :style="{ backgroundImage: `url('${gcBg}')` }">
                 <div class="gc-title">
                     <span>实施驱动平台创建、自身队伍创优、科技工作创新</span>
                 </div>
                 <div class="gc-content">
                     <span>创新是引领发展的第一动力。加强科技创新作为最紧迫任务，加快关键核心技术攻关，榆林牢记总书记谆谆嘱托，紧抓全省秦创原创新驱动平台建设重要契机，以科技创新赋能高质量发展。2021年3月30日以来，榆林市委、市政府高度重视，抢抓机遇，掀起全面深度融入秦创原工作热潮，随着秦创原（榆林）创新促进中心正式获批冠名，标志着榆林科技创新迈向新征程。榆林科技创新以“3365”发展战略为统领，以实施驱动平台创建、自身队伍创优、科技工作创新“三大工程”为目标，以建立组丝联动、运行联通 、功能联合“三项机制”为保障，以抓站位、抓队伍、抓业务、打宣传、抓学习，抓督导，确保工作有动力、有力度、有权威、有氛围、有能力、有成效的“六抓六确保“为抓手，以需求征集、技术研发、成果转化、项目落地、需要萌生“料技五环”为支撑，打造创新驱动新体系，科技管理新模式、创新发展新路径。科学的决策，创新的举措，以秦创原引领高质量发展正在成为榆林生动实践。</span>
                 </div>
-                <div class="gc-icon">
-
+                <div class="gc-imgList">
+                    <div style="width: 280px;">
+                        <el-image class="gc-img" :src="gcImg1"></el-image>
+                        <div class="gc-icon">
+                            <el-image style="width: 64px;" :src="gcImg3"></el-image>
+                            <div class="gc-text">
+                                <span>01 驱动平台创建工程</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 280px;">
+                        <el-image class="gc-img" :src="gcImg2"></el-image>
+                        <div class="gc-icon">
+                            <el-image style="width: 64px;" :src="gcImg4"></el-image>
+                            <div class="gc-text">
+                                <span>02 自身队伍创优工程</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 280px;">
+                        <el-image class="gc-img" :src="gcImg1"></el-image>
+                        <div class="gc-icon">
+                            <el-image style="width: 64px;" :src="gcImg5"></el-image>
+                            <div class="gc-text">
+                                <span>03 科技工作创新工程</span>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="title">
@@ -59,16 +116,25 @@
                 <div class="text">六项举措</div>
             </div>
             <div class="jucuo">
-                <div class="row">
-
-                </div>
+                
             </div>
         </div>
     </div>
 </template>
 <script setup>
 import titleBackgroundImage from "../../assets/qinchuangyuan3665/1.png"
+import gcImg1 from "../../assets/qinchuangyuan3665/3.png"
+import gcImg2 from "../../assets/qinchuangyuan3665/4.png"
+import gcImg3 from "../../assets/qinchuangyuan3665/5.png"
+import gcImg4 from "../../assets/qinchuangyuan3665/6.png"
+import gcImg5 from "../../assets/qinchuangyuan3665/7.png"
+import gcBg from "../../assets/qinchuangyuan3665/gc-bg.png"
 import jucuo1 from "../../assets/qinchuangyuan3665/2.png"
+import headerBg from "../../assets/qinchuangyuan3665/header-bg.png"
+import headerList1 from "../../assets/qinchuangyuan3665/h-1.png"
+import headerList2 from "../../assets/qinchuangyuan3665/h-2.png"
+import headerList3 from "../../assets/qinchuangyuan3665/h-3.png"
+import headerList4 from "../../assets/qinchuangyuan3665/h-4.png"
 
 
 
@@ -85,9 +151,41 @@ import jucuo1 from "../../assets/qinchuangyuan3665/2.png"
     font-family: PingFang SC;
 
     .header {
-        width: 100%;
-        height: 400px;
-        border: 1px solid rgba(255,255,255,.2);
+        // width: 100%;
+        height: 550px;
+        // border: 1px solid rgba(255,255,255,.2);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 40% 0;
+
+        .header-body {
+            width: 1200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 60px;
+            margin: auto;
+            height: 500px;
+        }
+
+        .header-title {
+            margin: auto;
+            font-size: 46px;
+            color: #fff;
+            font-weight: 800;
+        }
+        .header-list {
+            padding: 0 50px;
+            display: flex;
+            justify-content: space-between;
+            
+            .header-text{
+                margin-top: 15px;
+                font-size: 24px;
+                font-weight: bold;
+                color: #FFFFFF;
+            }
+        }
     }
 
     .width1200 {
@@ -116,8 +214,6 @@ import jucuo1 from "../../assets/qinchuangyuan3665/2.png"
         }
 
         .gongcheng {
-            height: 200px;
-            background-color: #d6e6f3;
             padding: 20px 30px;
 
             .gc-title {
@@ -135,11 +231,32 @@ import jucuo1 from "../../assets/qinchuangyuan3665/2.png"
                 margin: 15px 0;
             }
 
-            .gc-icon {
+            .gc-imgList {
+                margin-top: 20px;
                 display: flex;
                 justify-content: space-between;
                 padding: 0 60px;
+                height: 160px;
                 
+                .gc-img {
+                    width: 280px;
+                    height: 160px;
+                    position: relative;
+                }
+                .gc-icon {
+                    margin-top: -135px;
+                    margin-left: 108px;
+                    position: absolute;
+                    font-size: 18px;
+                    .gc-text {
+                        color: #fff;
+                        margin-left: -50px;
+                        margin-top: 10px;
+                        width: 300px;
+                        position: absolute;
+                        font-weight: bold;
+                    }
+                }
             }
         }
         

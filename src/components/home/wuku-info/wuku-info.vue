@@ -29,6 +29,19 @@
           {{ button.text }}
         </span>
       </div>
+      <div class="search">
+        <div class="search-box">
+          <el-input v-model="keyword" size="large" placeholder="请输入关键字" />
+        </div>
+        <el-button
+          class="search-button"
+          type="primary"
+          size="large"
+          @click="search"
+        >
+          <span style="color: #fff">搜索</span>
+        </el-button>
+      </div>
     </div>
     <div>
       <el-table
@@ -196,6 +209,7 @@ const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
   district: null,
+  name: null
 });
 
 const loading = ref(false);
@@ -214,10 +228,23 @@ const wukuType = ref([
   { text: "基金", clicked: false },
 ]);
 
-function getList() {
+const keyword = ref("");
+
+function search() {
+  if (keyword) {
+    getList(true);
+  }
+}
+
+function getList(isSearch) {
   loading.value = true;
   const district = selectConfigList.value[lastSelectDiQu.value].text;
   queryParams.value.district = district == "全部" ? null : district;
+  if (isSearch) {
+    queryParams.value.name = keyword.value;
+  } else {
+    queryParams.value.name = null;
+  }
   const type = wukuType.value[lastSelectType.value];
   switch (type.text) {
     case "技术需求":
@@ -245,7 +272,7 @@ function getList() {
       });
       break;
     case "基金":
-      listTalents(queryParams.value).then((res) => {
+      listFoundation(queryParams.value).then((res) => {
         tableData.value = res.rows;
         total.value = res.total;
       });
@@ -355,6 +382,25 @@ getDiquList();
 
 .wordTitle {
   color: #0062A8;
+}
+
+.search {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  display: flex;
+}
+.search-box {
+  width: 580px;
+  margin-right: 15px;
+}
+.search-button {
+  width: 80px;
+  --el-button-bg-color: #0062a8;
+  --el-button-border-color: #0062a8;
+  --el-button-hover-bg-color: rgb(51, 129, 185);
+  --el-button-hover-border-color: rgb(51, 129, 185);
+  --el-button-active-bg-color: rgb(0, 88, 151);
+  --el-button-active-border-color: rgb(0, 88, 151);
 }
 </style>
 <style>
