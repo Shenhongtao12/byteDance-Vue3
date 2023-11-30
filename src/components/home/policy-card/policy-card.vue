@@ -1,5 +1,5 @@
 <template>
-    <div class="home-policy-card">
+    <div class="home-policy-card" @click="goPolicyInfo">
         <div class="header">
             <div class="date">
                 <span class="year-month">{{ yearMonth }}</span>
@@ -19,8 +19,15 @@
 <script setup>
 import { Right } from '@element-plus/icons-vue';
 import { toRefs } from 'vue'
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const props = defineProps({
+    id: {
+        type: Number,
+        required: true
+    },
     yearMonth: {
         type: String,
         required: true
@@ -39,7 +46,11 @@ const props = defineProps({
     }
 })
 
-const { yearMonth, day, title, description } = toRefs(props)
+const { id, yearMonth, day, title, description } = toRefs(props)
+
+function goPolicyInfo() {
+    router.push("/zhengcexiangqing/" + id.value);
+}
 </script>
   
 <style scoped>
@@ -49,6 +60,7 @@ const { yearMonth, day, title, description } = toRefs(props)
     border-radius: 4px;
     box-shadow: #ff2961;
     box-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .header {

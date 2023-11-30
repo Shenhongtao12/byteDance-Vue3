@@ -63,7 +63,7 @@
           class-name="small-padding fixed-width"
         >
           <template #default="scope">
-            <el-button type="primary" link @click="zixun(scope.row)"
+            <el-button type="primary" link @click="zixun($event, scope.row)"
               ><span style="color: #0062a8">我要咨询</span></el-button
             >
           </template>
@@ -81,12 +81,17 @@
       />
     </div>
   </div>
-
+  <ZixunForm ref="zixunDialogRef" :demandType="3" />
   <div class="end"></div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, getCurrentInstance } from "vue";
 import { listPolicyInitiative } from "../../api/system/policyInitiative";
+import ZixunForm from "@/components/zixun-form"
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const { proxy } = getCurrentInstance();
 
 const keyword = ref("");
 const searchType = ref("标题");
@@ -124,10 +129,14 @@ function getPolicyInitiative() {
   });
 }
 
-function zixun(row) {}
+// 打开咨询的对话框
+function zixun(event, row) {
+  event.stopPropagation(); // 阻止事件冒泡
+  proxy.$refs["zixunDialogRef"].openDialog(row.title);
+}
 
 function rowClick(row) {
-  console.log(row.id);
+  router.push("/zhengcexiangqing/" + row.id);
 }
 
 getPolicyInitiative();

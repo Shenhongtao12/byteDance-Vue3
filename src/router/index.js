@@ -45,12 +45,17 @@ const routes = [
                         meta: { title: '政策举措' },
                     },
                     {
-                        path: '/zhengcexiangqing',
+                        path: '/zhengcexiangqing/:id(\\d+)',
                         name: 'zhengcexiangqing',
-                        component: () => import('@/views/zhengce/zhengce-list.vue'),
+                        component: () => import('@/views/zhengce/zhengce-info.vue'),
                         meta: { title: '政策详情' },
                     },
                 ]
+            },
+            {
+                path: '/qinchuangyuan3665',
+                component: () => import('@/views/qinchuangyuan3665/index.vue'),
+                name: 'qinchuangyuan3665'
             },
         ]
     },

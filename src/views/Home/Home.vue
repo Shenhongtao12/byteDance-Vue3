@@ -4,14 +4,14 @@
       <Carousel />
     </div>
     <div class="width1200">
-      <part-title title="新闻动态" />
+      <part-title title="新闻动态" :is-link="true" link="/xinwen" />
       <news-card v-if="newsTrendsList.length > 0" :news="newsTrendsList" :imageUrl="imageUrl"></news-card>
     </div>
     <div class="width1200">
-      <part-title title="政策举措" />
+      <part-title title="政策举措" :is-link="true" link="/zhengce" />
       <div class="policy-grid-container" v-if="policyInitiativeList.length > 0">
         <div v-for="(item, index) in policyInitiativeList" :key="index">
-          <policy-card :yearMonth="parseTime(item.releaseDate, '{y}-{m}')" :day="parseTime(item.releaseDate, '{d}')" :title="item.title"
+          <policy-card :id="item.id" :yearMonth="parseTime(item.releaseDate, '{y}-{m}')" :day="parseTime(item.releaseDate, '{d}')" :title="item.title"
           :description="item.content" />
         </div>
       </div>

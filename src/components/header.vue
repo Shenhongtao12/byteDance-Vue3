@@ -7,28 +7,31 @@
         </a>
       </div>
       <ul class="navbar">
-        <router-link to="/" exact v-slot="{ href, navigate, isActive }">
-          <li class="navbar-item" :class="{ active: isActive }">
-            <a :href="href" @click="navigate">首页</a>
-          </li>
-        </router-link>
-        <router-link exact to="/jobs" v-slot="{ href, navigate, isActive }">
-          <li class="navbar-item" :class="{ active: isActive }">
-            <a :href="href" @click="navigate">空间&政策</a>
-          </li>
-        </router-link>
-        <router-link to="/products" v-slot="{ href, navigate, isActive }">
-          <li class="navbar-item" :class="{ active: isActive }">
-            <a :href="href" @click="navigate">创新&创业</a>
-          </li>
-        </router-link>
         <li class="navbar-item">
-          <a href="https://job.bytedance.com/campus" target="_blank"
+          <a href="https://www.qinchuangyuan.com/html/web/index.html">首页</a>
+        </li>
+        <li class="navbar-item">
+          <a
+            href="https://www.qinchuangyuan.com/html/web/zhengcefuwu/index.html"
+            target="_blank"
+            >空间&政策</a
+          >
+        </li>
+        <li class="navbar-item">
+          <a
+            href="https://www.qinchuangyuan.com/html/web/enterpreneurship/index.html"
+            target="_blank"
+            >创新&创业</a
+          >
+        </li>
+        <li class="navbar-item">
+          <a
+            href="https://www.qinchuangyuan.com/html/web/qyyyfw/index.html"
+            target="_blank"
             >运营&成长</a
           >
         </li>
         <li class="navbar-item">
-          <!-- <a href="https://job.bytedance.com/campus" target="_blank">资本大市场</a> -->
           <el-dropdown>
             <span class="header-dropdown-link">
               资本大市场
@@ -38,12 +41,33 @@
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>个人简历</el-dropdown-item>
-                <el-dropdown-item>应聘记录</el-dropdown-item>
+                <el-dropdown-item>
+                  <a
+                    href="https://www.qinchuangyuan.com/html/web/zbfw/index.html"
+                    target="_blank"
+                    >融资&投资</a
+                  >
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <a
+                    href="https://www.qinchuangyuan.com/html/web/financial/index.html"
+                    target="_blank"
+                    >科技&金融</a
+                  >
+                </el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
         </li>
+        <router-link
+          exact
+          to="/qinchuangyuan3665"
+          v-slot="{ href, navigate, isActive }"
+        >
+          <li class="navbar-item" :class="{ active: isActive }">
+            <a :href="href" @click="navigate">秦创原'3665'战略</a>
+          </li>
+        </router-link>
         <li class="navbar-item">
           <a
             href="https://www.qinchuangyuan.com:443/html/web/about/index.html"
@@ -57,7 +81,7 @@
         <div class="login">
           <router-link to="/login" v-slot="{ href, navigate, isActive }">
             <li class="navbar-item" :class="{ active: isActive }">
-              <a v-if="!username" :href="href" @click="navigate">登录</a>
+              <a :href="href" @click="navigate">登录</a>
             </li>
           </router-link>
         </div>
@@ -85,20 +109,6 @@ const props = defineProps({
   },
 });
 
-const logout = () => {
-  ElNotification({
-    title: "Success",
-    message: "退出成功",
-    type: "success",
-    offset: 100,
-  });
-  store.commit("LOGOUT");
-};
-
-const username = computed(() => {
-  return store.state.username;
-});
-
 const { themeColor, fixedToTop } = toRefs(props);
 </script>
 
@@ -113,12 +123,6 @@ const { themeColor, fixedToTop } = toRefs(props);
   width: 1200px;
   box-sizing: border-box;
 
-  // header 浮动在整体上面
-  // &.fixedToTop {
-  //   position: fixed;
-  //   width: 100%;
-  // }
-
   &.main-color {
     background-color: rgba(255, 255, 255, 0.8);
     border-bottom: 1px solid #eff0f1;
@@ -130,33 +134,13 @@ const { themeColor, fixedToTop } = toRefs(props);
     .navbar-item {
       &:hover {
         a {
-          color: @main-color;
+          // color: @main-color;
         }
       }
 
       &.active {
         a {
-          color: @main-color;
-        }
-      }
-    }
-
-    .login {
-      .navbar-item {
-        .el-dropdown span {
-          color: #333;
-        }
-
-        &:hover {
-          a {
-            color: @main-color;
-          }
-        }
-
-        &.active {
-          a {
-            color: @main-color;
-          }
+          // color: @main-color;
         }
       }
     }
@@ -202,7 +186,7 @@ const { themeColor, fixedToTop } = toRefs(props);
 
     &.active {
       border-bottom: 2px solid;
-      color: @main-color;
+      color: #89b8dd;
     }
   }
 
@@ -281,19 +265,6 @@ const { themeColor, fixedToTop } = toRefs(props);
       }
     }
   }
-}
-
-.github-project {
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.example-showcase .el-dropdown-link {
-  cursor: pointer;
-  color: #333;
-  display: flex;
-  align-items: center;
 }
 
 .header-dropdown-link {

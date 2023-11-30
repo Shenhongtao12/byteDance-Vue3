@@ -1,25 +1,52 @@
 <template>
   <div class="title-component">
-    <div class="line">
+    <!-- <div class="line">
         <div class="line-left"></div>
+    </div> 
+    <div class="left-triangle"></div>-->
+
+    <div class="fenge">
+        <el-image :src="FengeLeft" fit="cover"></el-image>
     </div>
-    
-    <div class="left-triangle"></div>
-    <div class="title">{{ title }}</div>
-    <div class="right-triangle"></div>
+    <div class="title">
+        <router-link v-if="isLink" :to="link">
+            <span style="cursor: pointer;">
+                {{ title }}
+            </span>
+        </router-link>
+        <span v-else>
+            {{ title }}
+        </span>
+    </div>
+    <div class="fenge">
+        <el-image :src="FengeRight" fit="cover"></el-image>
+    </div>
+
+    <!-- <div class="right-triangle"></div>
     <div class="line">
         <div class="line-right"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script setup>
 import { toRefs } from "vue";
+import FengeLeft from "@/assets/images/fenge-left.png"
+import FengeRight from "@/assets/images/fenge-right.png"
 
 const props = defineProps({
   title: {
     type: String,
     required: true,
+  },
+  isLink: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
+  link: {
+    type: String,
+    required: false,
   },
 });
 
@@ -31,6 +58,11 @@ const { title } = toRefs(props);
     display: flex;
     align-items: center;
     margin: 40px 40px;
+}
+
+.fenge {
+    width: 480px;
+    margin-top: 5px;
 }
 
 .line {
@@ -75,7 +107,7 @@ const { title } = toRefs(props);
 
 .title {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 22px;
     margin: 0px 24px;
 }
 </style>

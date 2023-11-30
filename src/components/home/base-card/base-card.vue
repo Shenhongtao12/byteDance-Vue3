@@ -8,74 +8,14 @@
     <span class="des">{{ des }}</span>
     <button class="button" @click="openDialog">{{ buttonText }}</button>
   </div>
-
-  <el-dialog
-    :title="dialogTitle"
-    v-model="open"
-    width="600px"
-    :before-close="handleClose"
-  >
-    <el-form
-      ref="xuqiuchengguoRef"
-      :model="form"
-      :rules="rules"
-      label-width="100px"
-    >
-      <el-form-item
-        :label="dialogTitle == '需求征集' ? '需求描述' : '成果内容'"
-        prop="content"
-      >
-        <el-input
-          v-model="form.content"
-          maxlength="1000"
-          type="textarea"
-          rows="4"
-          placeholder="请输入内容"
-        />
-      </el-form-item>
-      <el-form-item label="组织名称" prop="tissueName">
-        <el-input
-          v-model="form.tissueName"
-          maxlength="100"
-          placeholder="请输入组织名称"
-        />
-      </el-form-item>
-      <el-form-item label="联系人" prop="contact">
-        <el-input
-          v-model="form.contact"
-          maxlength="100"
-          placeholder="请输入联系人"
-        />
-      </el-form-item>
-      <el-form-item label="联系方式" prop="phone">
-        <el-input
-          v-model="form.phone"
-          maxlength="30"
-          placeholder="请输入联系方式"
-        />
-      </el-form-item>
-    </el-form>
-    <template #footer>
-      <div class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="open = false">取 消</el-button>
-      </div>
-    </template>
-  </el-dialog>
+  <ZixunForm ref="zixunDialogRef" :demandType="demandType" />
 </template>
 
 <script setup>
-import {
-  toRefs,
-  ref,
-  onMounted,
-  reactive,
-  getCurrentInstance,
-} from "vue";
+import { onMounted, toRefs, ref, getCurrentInstance, nextTick } from "vue";
 import baseCardLeftLine from "../../../assets/images/base-card-left-line.png";
 import baseCardRightLine from "../../../assets/images/base-card-right-line.png";
-
-import { addDemandOutcome } from "@/api/system/demandOutcome";
+import ZixunForm from "@/components/zixun-form"
 
 const { proxy } = getCurrentInstance();
 
@@ -93,57 +33,21 @@ const props = defineProps({
     required: true,
   },
 });
-const data = reactive({
-  form: {},
-  rules: {
-    contact: [{ required: true, message: "联系人不能为空", trigger: "blur" }],
-    phone: [{ required: true, message: "联系方式不能为空", trigger: "blur" }],
-    content: [{ required: true, message: "内容不能为空", trigger: "blur" }],
-  },
-});
+
 
 const { title, des, buttonText } = toRefs(props);
-const { form, rules } = toRefs(data);
-const open = ref(false);
-
-const dialogTitle = ref("");
-function openDialog() {
-  reset();
-  if (buttonText.value == "我要发布") {
-    dialogTitle.value = "需求征集";
+const demandType = ref(1);
+onMounted(() => {
+  if (buttonText == "我要发布") {
+    demandType.value = 1;
   } else {
-    dialogTitle.value = "成果对接";
+    demandType.value = 2;
   }
-  open.value = true;
-}
+})
 
-function reset() {
-  form.value = {
-    content: null,
-    type: null,
-    tissueName: null,
-    contact: null,
-    phone: null,
-  };
-  proxy.resetForm("xuqiuchengguoRef");
-}
-function handleClose() {
-    open.value = false;
-}
-
-function submitForm() {
-  proxy.$refs["xuqiuchengguoRef"].validate((valid) => {
-    if (valid) {
-      if (dialogTitle.value == "需求征集") {
-        form.value.type = 1;
-      } else {
-        form.value.type = 2;
-      }
-      addDemandOutcome(form.value).then((response) => {
-        ElMessage.success("提交成功");
-        open.value = false;
-      });
-    }
+function openDialog() {
+  nextTick(() => {
+    proxy.$refs["zixunDialogRef"].openDialog();
   });
 }
 </script>
