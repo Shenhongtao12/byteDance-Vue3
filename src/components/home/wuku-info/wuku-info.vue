@@ -39,7 +39,7 @@
           size="large"
           @click="search"
         >
-          <span style="color: #fff">搜索</span>
+          <span style="color: #fff; font-size: 16px; font-family: PingFang SC;">搜索</span>
         </el-button>
       </div>
     </div>
@@ -81,7 +81,7 @@
         </template>
       </el-table-column>
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 0" label="需求单位" prop="reqEnterprise" />
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 0" label="所属地区" prop="district" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 0" width="90" label="所属地区" prop="district" />
 
       <!-- 技术研究项目 -->
       <el-table-column v-if="lastSelectType == 1" label="项目名称" prop="name">
@@ -114,8 +114,8 @@
         </template>
       </el-table-column>
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" label="项目承担单位" prop="undertakeEnterprise" />
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" label="所属地区" prop="district" />
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" label="级别" prop="level" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" width="90" label="所属地区" prop="district" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 1" width="100" label="级别" prop="level" />
 
       <!-- 重大成果 -->
       <el-table-column v-if="lastSelectType == 2" label="名称" prop="name">
@@ -161,23 +161,23 @@
         </template>
       </el-table-column>
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 2" label="委托单位" prop="entrustEnterprise" />
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 2" label="所属地区" prop="district" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 2" width="90" label="所属地区" prop="district" />
       <!-- 人才 -->
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" class="wordTitle" label="姓名" prop="name" />
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="年龄" prop="age" />
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="性别" prop="sex" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" width="100" class="wordTitle" label="姓名" prop="name" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" width="90" label="年龄" prop="age" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" width="90" label="性别" prop="sex" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="单位" prop="enterprise" />
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="所属地区" prop="district" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" width="90" label="所属地区" prop="district" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="职级" prop="level" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="产业领域" prop="domain" />
       <!-- 基金 -->
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" class="wordTitle" label="名称" prop="name" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" label="类别" prop="classify" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" label="所属单位" prop="enterprise" />
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" label="所属地区" prop="district" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" width="90" label="所属地区" prop="district" />
 
-      <el-table-column :show-overflow-tooltip="true" label="联系人" prop="contact" />
-      <el-table-column :show-overflow-tooltip="true" label="联系方式" prop="phone" />
+      <el-table-column :show-overflow-tooltip="true" width="90" label="联系人" prop="contact" />
+      <el-table-column :show-overflow-tooltip="true" width="130" label="联系方式" prop="phone" />
       </el-table>
     </div>
     <div class="page">
@@ -336,6 +336,9 @@ function getDiquList() {
 getDiquList();
 </script>
 <style scoped>
+.box-card {
+  font-family: PingFang SC;
+}
 .filter {
   padding: 0 15px 15px 15px;
 }

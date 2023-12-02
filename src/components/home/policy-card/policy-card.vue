@@ -61,6 +61,7 @@ function goPolicyInfo() {
     box-shadow: #ff2961;
     box-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    font-family: PingFang SC;
 }
 
 .header {

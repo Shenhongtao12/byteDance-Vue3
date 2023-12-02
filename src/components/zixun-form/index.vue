@@ -47,7 +47,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button class="button" type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="open = false">取 消</el-button>
       </div>
     </template>
@@ -134,3 +134,13 @@ defineExpose({
     openDialog
 })
 </script>
+<style scoped>
+.button {
+  --el-button-bg-color: #0062a8;
+  --el-button-border-color: #0062a8;
+  --el-button-hover-bg-color: rgb(51, 129, 185);
+  --el-button-hover-border-color: rgb(51, 129, 185);
+  --el-button-active-bg-color: rgb(0, 88, 151);
+  --el-button-active-border-color: rgb(0, 88, 151);
+}
+</style>

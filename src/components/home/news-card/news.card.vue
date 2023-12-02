@@ -140,6 +140,7 @@ function openNews(id) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: PingFang SC;
 }
 
 .news-list-item>.date {
