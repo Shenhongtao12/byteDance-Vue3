@@ -116,12 +116,57 @@
                 <div class="text">六项举措</div>
             </div>
             <div class="jucuo">
-                
+                <Jucuo/>
+            </div>
+            <div class="title">
+                <el-image class="img" :src="titleBackgroundImage"  fit="cover"></el-image>
+                <div class="text">科技五环</div>
+            </div>
+            <div class="wuhuan">
+                <div class="wh-bg">
+                    <el-image class="img" :src="Wuhuan" fit="cover"/>
+                </div>
+                <div class="wuhuan-list wh-yanfa">
+                    <el-image class="img-small" :src="Yanfa" fit="cover"/>
+                    <span class="wh-text">技术研发</span>
+                </div>
+                <div class="wuhuan-list wh-xuqiu">
+                    <el-image class="img-small" :src="Xuqiu" fit="cover"/>
+                    <span class="wh-text">需求征集</span>
+                </div>
+                <div class="wuhuan-list wh-mengsheng">
+                    <el-image class="img-small" :src="Mengsheng" fit="cover"/>
+                    <span class="wh-text">需要萌生</span>
+                </div>
+                <div class="wuhuan-list wh-luodi">
+                    <el-image class="img-small" :src="Luodi" fit="cover"/>
+                    <span class="wh-text">项目落地</span>
+                </div>
+                <div class="wuhuan-list wh-zhuanhua">
+                    <el-image class="img-small" :src="zhuanhua" fit="cover" />
+                    <span class="wh-text">成果转化</span>
+                </div>
+                <div  class="wu-jiantou1">
+                    <el-image class="img-jiantou" :src="wh1" fit="cover" />
+                </div>
+                <div  class="wu-jiantou2">
+                    <el-image class="img-jiantou" :src="wh2" fit="cover" />
+                </div>
+                <div  class="wu-jiantou3">
+                    <el-image class="img-jiantou" :src="wh3" fit="cover" />
+                </div>
+                <div  class="wu-jiantou4">
+                    <el-image class="img-jiantou" :src="wh4" fit="cover" />
+                </div>
+                <div  class="wu-jiantou5">
+                    <el-image class="img-jiantou" :src="wh5" fit="cover" />
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
+import Jucuo from "./jucuo.vue"
 import titleBackgroundImage from "../../assets/qinchuangyuan3665/1.png"
 import gcImg1 from "../../assets/qinchuangyuan3665/3.png"
 import gcImg2 from "../../assets/qinchuangyuan3665/4.png"
@@ -129,16 +174,22 @@ import gcImg3 from "../../assets/qinchuangyuan3665/5.png"
 import gcImg4 from "../../assets/qinchuangyuan3665/6.png"
 import gcImg5 from "../../assets/qinchuangyuan3665/7.png"
 import gcBg from "../../assets/qinchuangyuan3665/gc-bg.png"
-import jucuo1 from "../../assets/qinchuangyuan3665/2.png"
 import headerBg from "../../assets/qinchuangyuan3665/header-bg.png"
 import headerList1 from "../../assets/qinchuangyuan3665/h-1.png"
 import headerList2 from "../../assets/qinchuangyuan3665/h-2.png"
 import headerList3 from "../../assets/qinchuangyuan3665/h-3.png"
 import headerList4 from "../../assets/qinchuangyuan3665/h-4.png"
-
-
-
-
+import Wuhuan from "../../assets/qinchuangyuan3665/wuhuan-bg.png"
+import Yanfa from "../../assets/qinchuangyuan3665/jishuyanfa.png"
+import Xuqiu from "../../assets/qinchuangyuan3665/xuqiuzhengji.png"
+import Mengsheng from "../../assets/qinchuangyuan3665/xuyaomengsheng.png"
+import Luodi from "../../assets/qinchuangyuan3665/xiangmuluodi.png"
+import zhuanhua from "../../assets/qinchuangyuan3665/chengguozhuanhua.png"
+import wh1 from "../../assets/qinchuangyuan3665/wh-1.png"
+import wh2 from "../../assets/qinchuangyuan3665/wh-2.png"
+import wh3 from "../../assets/qinchuangyuan3665/wh-3.png"
+import wh4 from "../../assets/qinchuangyuan3665/wh-4.png"
+import wh5 from "../../assets/qinchuangyuan3665/wh-5.png"
 
 
 </script>
@@ -196,7 +247,7 @@ import headerList4 from "../../assets/qinchuangyuan3665/h-4.png"
         margin: auto;
 
         .title {
-            margin: 18px 0;
+            margin: 20px 0;
             font-size: 24px;
             color: #fff;
             height: 56px;
@@ -282,10 +333,106 @@ import headerList4 from "../../assets/qinchuangyuan3665/h-4.png"
             }
         }
 
-        .jucuo {
-            .row {
-                display: flex;
+        .wuhuan {
+            height: 800px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
 
+            .img {
+                width: 620px;
+                height: 620px;
+            }
+
+            .wuhuan-list {
+                width: 180px;
+                height: 180px;
+                background: #FFFFFF;
+                border: 1px solid #D2E3F2;
+                box-shadow: 0px 0px 14px 2px #D2E3F2;
+                border-radius: 50%;
+
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .img-small {
+                width: 79px;
+                height: 99px;
+            }
+
+            .wh-text {
+                font-size: 22px;
+                font-family: PingFang SC;
+                font-weight: bold;
+                color: #333333;
+            }
+
+            .img-jiantou {
+                width: 21px;
+                height: 21px;
+            }
+
+            .wh-bg {
+                position: absolute;
+            }
+
+            .wh-yanfa {
+                position: absolute;
+                margin-top: -650px;
+            }
+            .wh-xuqiu {
+                position: absolute;
+                margin-top: -150px;
+                margin-left: -620px;
+            }
+            .wh-mengsheng {
+                position: absolute;
+                margin-top: 500px;
+                margin-left: -400px;
+            }
+            .wh-luodi {
+                position: absolute;
+                margin-top: 500px;
+                margin-right: -400px;
+            }
+            .wh-zhuanhua {
+                position: absolute;
+                margin-top: -150px;
+                margin-right: -620px;
+            }
+
+            .wu-jiantou1 {
+                position: absolute;
+                margin-top: -455px;
+                margin-right: -420px;
+            }
+
+            .wu-jiantou2 {
+                position: absolute;
+                margin-top: 205px;
+                margin-right: -585px;
+            }
+
+            .wu-jiantou3 {
+                position: absolute;
+                margin-top: 618px;
+            }
+
+            .wu-jiantou4 {
+                position: absolute;
+                margin-top: 205px;
+                margin-left: -585px;
+            }
+
+            .wu-jiantou5 {
+                position: absolute;
+                margin-top: -455px;
+                margin-left: -420px;
             }
         }
     }

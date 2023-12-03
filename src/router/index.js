@@ -50,6 +50,12 @@ const routes = [
                         component: () => import('@/views/zhengce/zhengce-info.vue'),
                         meta: { title: '政策详情' },
                     },
+                    {
+                        path: '/qiyepeiyu',
+                        name: 'qiyepeiyu',
+                        component: () => import('@/views/zhibiao/qiyepeiyu.vue'),
+                        meta: { title: '企业培育' },
+                    },
                 ]
             },
             {

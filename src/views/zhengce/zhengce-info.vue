@@ -1,4 +1,5 @@
 <template>
+  <div style="background-color: #1e70ff1a">
   <div class="body" v-if="policy !=null">
     <div class="table">
       <el-descriptions :column="2" border>
@@ -42,6 +43,7 @@
   </div>
   <ZixunForm ref="zixunDialogRef" :demandType="3" />
   <div style="height: 10px"></div>
+</div>
 </template>
 <script setup>
 import { ref, onMounted, getCurrentInstance } from "vue";

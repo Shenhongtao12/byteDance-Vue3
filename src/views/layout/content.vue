@@ -1,8 +1,8 @@
 <template>
-  <div
-    style="background-color: #1e70ff1a"
-  >
-    <breadcrumb />
+  <div>
+    <div style="background-color: #1e70ff1a">
+      <breadcrumb />
+    </div>
     <main>
       <router-view />
     </main>
@@ -12,7 +12,4 @@
   <script setup>
 import breadcrumb from "@/components/breadcrumb";
 </script>
-  
-  <style scoped lang="scss">
-</style>
   

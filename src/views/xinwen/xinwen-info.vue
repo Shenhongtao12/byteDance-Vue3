@@ -1,4 +1,5 @@
 <template>
+<div style="background-color: #1e70ff1a">
   <div style="margin: auto; width: 1200px; padding: 10px 0;">
 
     <div class="content" v-if="news !=null">
@@ -17,6 +18,7 @@
         </div>
     </div>
   </div>
+</div>
 </template>
 <script setup>
 import { onMounted, ref } from "vue";

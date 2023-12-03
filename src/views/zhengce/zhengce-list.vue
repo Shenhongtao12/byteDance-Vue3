@@ -1,5 +1,6 @@
 <template>
-  <div style="margin: auto; width: 1200px">
+  <div style="background-color: #1e70ff1a">
+  <div style="margin: auto; width: 1200px;">
     <div class="header">
       <div class="title">政策举措</div>
       <div class="sousuo">
@@ -83,6 +84,7 @@
   </div>
   <ZixunForm ref="zixunDialogRef" :demandType="3" />
   <div class="end"></div>
+</div>
 </template>
 <script setup>
 import { ref, getCurrentInstance } from "vue";

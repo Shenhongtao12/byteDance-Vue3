@@ -1,4 +1,5 @@
 <template>
+  <div style="background-color: #1e70ff1a">
   <div style="display: flex; justify-content: center">
     <div style="width: 1200px">
       <div
@@ -42,6 +43,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 <script setup>
 import { ref } from "vue";
