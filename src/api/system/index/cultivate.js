@@ -8,37 +8,9 @@ export function listCultivate(query) {
     params: query
   })
 }
-
-// 查询EnterpriseCultivate详细
-export function getCultivate(id) {
+export function group() {
   return request({
-    url: '/system/cultivate/' + id,
+    url: '/system/cultivate/group',
     method: 'get'
-  })
-}
-
-// 新增EnterpriseCultivate
-export function addCultivate(data) {
-  return request({
-    url: '/system/cultivate',
-    method: 'post',
-    data: data
-  })
-}
-
-// 修改EnterpriseCultivate
-export function updateCultivate(data) {
-  return request({
-    url: '/system/cultivate',
-    method: 'put',
-    data: data
-  })
-}
-
-// 删除EnterpriseCultivate
-export function delCultivate(id) {
-  return request({
-    url: '/system/cultivate/' + id,
-    method: 'delete'
   })
 }

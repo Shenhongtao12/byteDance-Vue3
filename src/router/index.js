@@ -51,10 +51,40 @@ const routes = [
                         meta: { title: '政策详情' },
                     },
                     {
+                        path: '/lianglianronghe',
+                        name: 'lianglianronghe',
+                        component: () => import('@/views/zhibiao/lianglianronghe.vue'),
+                        meta: { title: '两链融合' },
+                    },
+                    {
                         path: '/qiyepeiyu',
                         name: 'qiyepeiyu',
                         component: () => import('@/views/zhibiao/qiyepeiyu.vue'),
                         meta: { title: '企业培育' },
+                    },
+                    {
+                        path: '/kejirencai',
+                        name: 'kejirencai',
+                        component: () => import('@/views/zhibiao/kejirencai.vue'),
+                        meta: { title: '科技人才' },
+                    },
+                    {
+                        path: '/kejizhengce',
+                        name: 'kejizhengce',
+                        component: () => import('@/views/zhibiao/kejizhengce.vue'),
+                        meta: { title: '科技人才' },
+                    },
+                    {
+                        path: '/chuangxinpingtai',
+                        name: 'chuangxinpingtai',
+                        component: () => import('@/views/zhibiao/chuangxinpingtai.vue'),
+                        meta: { title: '创新平台' },
+                    },
+                    {
+                        path: '/rdjingweizhichu',
+                        name: 'rdjingweizhichu',
+                        component: () => import('@/views/zhibiao/rdjingweizhichu.vue'),
+                        meta: { title: '创新平台' },
                     },
                 ]
             },

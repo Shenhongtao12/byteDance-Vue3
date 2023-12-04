@@ -9,36 +9,9 @@ export function listTalents(query) {
   })
 }
 
-// 查询TechnologyTalents详细
-export function getTalents(id) {
+export function group() {
   return request({
-    url: '/system/talents/' + id,
+    url: '/system/talents/group',
     method: 'get'
-  })
-}
-
-// 新增TechnologyTalents
-export function addTalents(data) {
-  return request({
-    url: '/system/talents',
-    method: 'post',
-    data: data
-  })
-}
-
-// 修改TechnologyTalents
-export function updateTalents(data) {
-  return request({
-    url: '/system/talents',
-    method: 'put',
-    data: data
-  })
-}
-
-// 删除TechnologyTalents
-export function delTalents(id) {
-  return request({
-    url: '/system/talents/' + id,
-    method: 'delete'
   })
 }

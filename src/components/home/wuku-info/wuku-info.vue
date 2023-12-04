@@ -31,7 +31,7 @@
       </div>
       <div class="search">
         <div class="search-box">
-          <el-input v-model="keyword" size="large" placeholder="请输入关键字" />
+          <el-input v-model="keyword" @keyup.enter="search" size="large" placeholder="请输入关键字" />
         </div>
         <el-button
           class="search-button"
@@ -231,20 +231,14 @@ const wukuType = ref([
 const keyword = ref("");
 
 function search() {
-  if (keyword) {
-    getList(true);
-  }
+  queryParams.value.name = keyword.value;
+  getList();
 }
 
-function getList(isSearch) {
+function getList() {
   loading.value = true;
   const district = selectConfigList.value[lastSelectDiQu.value].text;
   queryParams.value.district = district == "全部" ? null : district;
-  if (isSearch) {
-    queryParams.value.name = keyword.value;
-  } else {
-    queryParams.value.name = null;
-  }
   const type = wukuType.value[lastSelectType.value];
   switch (type.text) {
     case "技术需求":

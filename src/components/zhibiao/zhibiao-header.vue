@@ -5,7 +5,7 @@
         </div>
         <div class="search" v-if="showSearch">
             <div class="input">
-                <el-input v-model="input" size="large" placeholder="请输入" clearable />
+                <el-input v-model="input" size="large" placeholder="请输入" @keyup.enter="search" clearable />
             </div>
             <div class="btn">
                 <el-button color="#C2A341" size="large" @click="search">

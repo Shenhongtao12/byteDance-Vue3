@@ -9,36 +9,9 @@ export function listPlatform(query) {
   })
 }
 
-// 查询InnovationPlatform详细
-export function getPlatform(id) {
+export function group() {
   return request({
-    url: '/system/platform/' + id,
+    url: '/system/platform/group',
     method: 'get'
-  })
-}
-
-// 新增InnovationPlatform
-export function addPlatform(data) {
-  return request({
-    url: '/system/platform',
-    method: 'post',
-    data: data
-  })
-}
-
-// 修改InnovationPlatform
-export function updatePlatform(data) {
-  return request({
-    url: '/system/platform',
-    method: 'put',
-    data: data
-  })
-}
-
-// 删除InnovationPlatform
-export function delPlatform(id) {
-  return request({
-    url: '/system/platform/' + id,
-    method: 'delete'
   })
 }

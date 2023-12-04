@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Header title="企业培育" @search="handleSearch" />
+    <Header title="创新平台" @search="handleSearch" />
   </div>
   <div style="margin: auto; width: 1200px; margin-bottom: 50px">
     <div style="background-color: #fff">
       <div class="type">
-        <span class="title">企业名单</span>
+        <span class="title">平台名单</span>
         <div style="display: flex; flex-wrap: wrap">
           <span
             class="tags"
@@ -29,34 +29,57 @@
       >
         <el-table-column type="index" align="center" label="序号" width="80" />
         <el-table-column
-          :show-overflow-tooltip="true"
-          prop="enterpriseName"
+          prop="name"
           align="center"
-          label="企业名称"
-        />
-        <el-table-column
-          :show-overflow-tooltip="true"
-          prop="domain"
-          align="center"
-          label="领域"
-        />
-        <el-table-column
-          prop="authTime"
-          align="center"
-          label="认证时间"
-          width="180"
+          label="名称"
         >
           <template #default="scope">
-            <span>{{ parseTime(scope.row.authTime, "{y}-{m}-{d}") }}</span>
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              :content="scope.row.name"
+              placement="top"
+            >
+              <div class="cell-content">
+                {{ scope.row.name }}
+              </div>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+        <el-table-column prop="level" align="center" label="级别" />
+        <el-table-column prop="intro" align="center" label="简介">
+          <template #default="scope">
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              :content="scope.row.intro"
+              placement="top"
+            >
+              <div class="cell-content">
+                {{ scope.row.intro }}
+              </div>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+        <el-table-column prop="principalUnit" align="center" label="主体单位">
+          <template #default="scope">
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              :content="scope.row.principalUnit"
+              placement="top"
+            >
+              <div class="cell-content">
+                {{ scope.row.principalUnit }}
+              </div>
+            </el-tooltip>
           </template>
         </el-table-column>
         <el-table-column
-          :show-overflow-tooltip="true"
           v-if="lastSelectType == 0"
-          width="150px"
-          prop="authType"
+          prop="platformType"
           align="center"
-          label="认证类型"
+          label="平台类型"
         />
       </el-table>
       <div class="page">
@@ -75,7 +98,7 @@
 <script setup>
 import Header from "@/components/zhibiao/zhibiao-header.vue";
 import { listSelectConfig } from "@/api/system/selectConfig";
-import { listCultivate, group } from "@/api/system/index/cultivate";
+import { listPlatform, group } from "@/api/system/index/platform";
 import { ref } from "vue";
 
 const selectConfigList = ref([
@@ -91,8 +114,8 @@ const total = ref(0);
 const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
-  authType: null,
-  enterpriseName: null,
+  platformType: null,
+  name: null,
 });
 
 const loading = ref(false);
@@ -100,7 +123,7 @@ const loading = ref(false);
 const tableData = ref([]);
 
 function handleSearch(value) {
-  queryParams.value.enterpriseName = value;
+  queryParams.value.name = value;
   getList();
 }
 function setClicked(index) {
@@ -118,7 +141,7 @@ function getRencaiTypeList() {
   const queryParams = {
     pageNum: 1,
     pageSize: 5000,
-    type: "指标管理-企业培育-认证类型",
+    type: "指标管理-创新平台-平台类型",
   };
   listSelectConfig(queryParams).then((response) => {
     group().then((result) => {
@@ -155,15 +178,15 @@ const tableRowClassName = ({ row, rowIndex }) => {
 function getList() {
   loading.value = true;
   const config = selectConfigList.value[lastSelectType.value];
-  const authType = config.text;
-  queryParams.value.authType = authType == "全部" ? null : authType;
-  listCultivate(queryParams.value).then((res) => {
+  const platformType = config.text;
+  queryParams.value.platformType = platformType == "全部" ? null : platformType;
+  listPlatform(queryParams.value).then((res) => {
     tableData.value = res.rows;
     total.value = res.total;
     loading.value = false;
-    if (config.num != res.total && !queryParams.value.enterpriseName) {
+    if (config.num != res.total && !queryParams.value.name) {
       config.num = res.total;
-      if (authType != "全部") {
+      if (platformType != "全部") {
         selectConfigList.value[0].num = selectConfigList.value
           .filter((y) => y.text !== "全部")
           .map((x) => x.num)
@@ -219,6 +242,14 @@ getRencaiTypeList();
   justify-content: end;
   padding: 25px 16px;
   background-color: #fff;
+}
+.cell-content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 </style>
 <style>
