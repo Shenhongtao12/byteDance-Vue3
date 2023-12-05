@@ -7,7 +7,7 @@
             </div>
             <div class="title">{{ title }}</div>
         </div>
-        <div class="description">{{ description }}</div>
+        <div class="description" v-html="description"></div>
         <div class="footer">
             <el-button color="#D6E6F3" size="small">
                 <span style="color: #0062A8;">查看详情&nbsp;</span><el-icon color="#0062A8"><Right /></el-icon>
@@ -55,11 +55,11 @@ function goPolicyInfo() {
   
 <style scoped>
 .home-policy-card {
+    height: 232px;
     width: 375px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: #ff2961;
-    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0px 0px 14px 2px #D2E3F2;
     cursor: pointer;
     font-family: PingFang SC;
 }
@@ -121,6 +121,7 @@ function goPolicyInfo() {
 }
 
 .description {
+    height: 84px;
     font-size: 12px;
     line-height: 1.4;
     overflow: hidden;

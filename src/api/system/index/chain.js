@@ -8,3 +8,11 @@ export function listChain(query) {
     params: query
   })
 }
+
+// 查询chain列表
+export function statistics() {
+  return request({
+    url: '/system/chain/statistics',
+    method: 'get'
+  })
+}

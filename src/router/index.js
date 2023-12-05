@@ -72,7 +72,7 @@ const routes = [
                         path: '/kejizhengce',
                         name: 'kejizhengce',
                         component: () => import('@/views/zhibiao/kejizhengce.vue'),
-                        meta: { title: '科技人才' },
+                        meta: { title: '科技政策' },
                     },
                     {
                         path: '/chuangxinpingtai',
@@ -84,7 +84,13 @@ const routes = [
                         path: '/rdjingweizhichu',
                         name: 'rdjingweizhichu',
                         component: () => import('@/views/zhibiao/rdjingweizhichu.vue'),
-                        meta: { title: '创新平台' },
+                        meta: { title: 'R&D经费支出' },
+                    },
+                    {
+                        path: '/jishujiaoyi',
+                        name: 'jishujiaoyi',
+                        component: () => import('@/views/zhibiao/jishujiaoyi.vue'),
+                        meta: { title: '技术交易' },
                     },
                 ]
             },
@@ -95,33 +101,18 @@ const routes = [
             },
         ]
     },
-
-    // {
-    //   path: '/jobs/:id',
-    //   name: 'jobDetail',
-    //   component: () => import('@/views/JobDetail/JobDetail.vue')
-    // },
-    // {
-    //     path: '/staff-stories/:id',
-    //     name: 'staff-stories',
-    //     component: () => import('@/views/StaffStories/StaffStories.vue')
-    // },
-    // {
-    //     path: '/products',
-    //     name: 'products',
-    //     component: () => import('@/views/Products/Products.vue')
-    // },
-    // {
-    //     path: '/user',
-    //     name: 'user',
-    //     component: () => import('@/views/User/User.vue')
-    // }
 ]
 
 const router = createRouter({
     history: createWebHistory(),
     routes
 })
+
+router.beforeEach((to, from, next) => {
+    // 在每次路由跳转之前触发
+    window.scrollTo(0, 0); // 将滚动条回到顶部
+    next(); // 继续导航
+  });
 
 export default router
 

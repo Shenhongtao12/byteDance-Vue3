@@ -28,7 +28,7 @@ function init() {
   }
 
   let yMax = (moneyList.length > 0 ? Math.round(Math.max(...moneyList) + 4) : 10);
- 
+  const interval = Math.ceil(yMax / 5);
 
   const chartInstance = echarts.init(chartContainer.value);
   let options = {
@@ -81,7 +81,7 @@ function init() {
         name: "单位(亿元)",
         min: 0,
         max: yMax,
-        interval: 2,
+        interval: interval,
         axisLabel: {
           formatter: "{value}",
         },
@@ -101,6 +101,7 @@ function init() {
       {
         name: "R&D经费支出",
         type: "bar",
+        smooth: true,
         tooltip: {
           valueFormatter: function (value) {
             return value;
@@ -111,6 +112,7 @@ function init() {
       {
         name: "占GDP比重",
         type: "line",
+        smooth: true,
         yAxisIndex: 1,
         tooltip: {
           valueFormatter: function (value) {

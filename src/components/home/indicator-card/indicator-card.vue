@@ -1,5 +1,8 @@
 <template>
-    <div class="home-indicator-card" :style="{ backgroundImage: `url('${backgroundImage}')` }">
+    <div class="home-indicator-card" 
+        @click="openRouter"
+        :style="{ backgroundImage: `url('${backgroundImage}')` }"
+    >
         <div class="title-container">
             <div class="title">{{ title }}</div>
             <div class="vertical-line"></div>
@@ -14,6 +17,9 @@
   
 <script setup>
 import { toRefs, ref } from 'vue'
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const props = defineProps({
     backgroundImage: {
@@ -29,7 +35,7 @@ const props = defineProps({
         required: true
     },
     price: {
-        type: String,
+        type: Number,
         required: true
     },
     priceColor: {
@@ -39,15 +45,23 @@ const props = defineProps({
     unit: {
         type: String,
         required: true
+    },
+    routerPath: {
+        type: String,
+        required: true
     }
 })
 
 
-const { backgroundImage, title, price, unit, subTitle, priceColor } = toRefs(props)
+const { backgroundImage, title, price, unit, subTitle, priceColor, routerPath } = toRefs(props)
 
 const color = ref({
     color: priceColor
 })
+
+function openRouter() {
+    router.push(routerPath.value);
+}
 
 </script>
   
@@ -58,6 +72,7 @@ const color = ref({
     background-position: center;
     border-radius: 8px;
     padding: 24px;
+    cursor: pointer;
 }
 
 .title-container {

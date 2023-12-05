@@ -19,14 +19,14 @@
     <div class="width1200">
       <part-title title="指标展示" />
       <div class="indicator-grid-container">
-        <indicator-card :backgroundImage="card1Image" title="产业链" subTitle="两链融合" price="12" price-color="#0062A8" unit="条" />
-        <indicator-card :backgroundImage="card2Image" title="总交易金额" subTitle="技术交易" price="4.5" price-color="#C2A341" unit="亿元" />
-        <indicator-card :backgroundImage="card3Image" title="技术需求" subTitle="成果转化" price="116" price-color="#00B5FF" unit="项" />
-        <indicator-card :backgroundImage="card4Image" title="政策措施" subTitle="科技政策" price="36" price-color="#380E9B" unit="项" />
-        <indicator-card :backgroundImage="card5Image" title="经费支出" subTitle="R&D经费支出" price="10.42" price-color="#00E3C0" unit="亿元" />
-        <indicator-card :backgroundImage="card6Image" title="企业" subTitle="企业培育" price="814" price-color="#ED44F1" unit="家" />
-        <indicator-card :backgroundImage="card7Image" title="人才" subTitle="科技人才" price="767" price-color="#FF3B2D" unit="位" />
-        <indicator-card :backgroundImage="card8Image" title="创新平台" subTitle="创新平台" price="59" price-color="#0062A8" unit="个" />
+        <indicator-card :backgroundImage="card1Image" title="产业链" subTitle="两链融合" :price="indexStatistics.chain" price-color="#0062A8" unit="条" routerPath="/lianglianronghe" />
+        <indicator-card :backgroundImage="card2Image" title="总交易金额" subTitle="技术交易" :price="indexStatistics.tradin" price-color="#C2A341" unit="亿元" routerPath="/jishujiaoyi" />
+        <indicator-card :backgroundImage="card3Image" title="技术需求" subTitle="成果转化" :price="indexStatistics.convert" price-color="#00B5FF" unit="项" routerPath="/chengguozhuanhua" />
+        <indicator-card :backgroundImage="card4Image" title="政策措施" subTitle="科技政策" :price="indexStatistics.olicy" price-color="#380E9B" unit="项" routerPath="/kejizhengce" />
+        <indicator-card :backgroundImage="card5Image" title="经费支出" subTitle="R&D经费支出" :price="indexStatistics.expenditure" price-color="#00E3C0" unit="亿元" routerPath="/rdjingweizhichu" />
+        <indicator-card :backgroundImage="card6Image" title="企业" subTitle="企业培育" :price="indexStatistics.ciltivate" price-color="#ED44F1" unit="家" routerPath="/qiyepeiyu" />
+        <indicator-card :backgroundImage="card7Image" title="人才" subTitle="科技人才" :price="indexStatistics.talents" price-color="#FF3B2D" unit="位" routerPath="/kejirencai" />
+        <indicator-card :backgroundImage="card8Image" title="创新平台" subTitle="创新平台" :price="indexStatistics.platform" price-color="#0062A8" unit="个" routerPath="/chuangxinpingtai" />
       </div>
     </div>
     <div class="width1200">
@@ -69,8 +69,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, getCurrentInstance, onMounted, onUnmounted } from "vue";
-import EventBus from '../../helper/EventBus'
+import { ref, getCurrentInstance, onMounted } from "vue";
 import { useRouter } from 'vue-router'
 import IndicatorCard from '../../components/home/indicator-card/indicator-card.vue'
 import PolicyCard from '../../components/home/policy-card/policy-card.vue'
@@ -91,9 +90,22 @@ import card8Image from '../../assets/images/8.png'
 import homeBaseCardImage from '../../assets/images/home-base-card-image.png'
 import { listNewsTrends } from "../../api/system/newsTrends";
 import { listPolicyInitiative } from "../../api/system/policyInitiative";
+import { statistics } from "../../api/system/index/chain";
 
 const { proxy } = getCurrentInstance()
 const router = useRouter()
+
+// 8项指标
+const indexStatistics = ref({
+  chain: 0,
+  tradin: 0,
+  convert: 0,
+  olicy: 0,
+  expenditure: 0,
+  ciltivate: 0,
+  talents: 0,
+  platform: 0,
+});
 
 const queryParams = ref({
     pageNum: 1,
@@ -121,8 +133,16 @@ function getPolicyInitiative() {
     policyInitiativeList.value = res.rows;
   })
 }
+
+function getIndexStatistics() {
+  statistics().then(res => {
+    indexStatistics.value = res.data;
+  })
+}
+
 getNewsList();
 getPolicyInitiative();
+getIndexStatistics();
 </script>
 
 <style scoped lang="less">

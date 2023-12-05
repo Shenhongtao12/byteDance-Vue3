@@ -8,3 +8,10 @@ export function listTradin(query) {
     params: query
   })
 }
+
+export function echars() {
+  return request({
+    url: '/system/tradin/echars',
+    method: 'get',
+  })
+}
