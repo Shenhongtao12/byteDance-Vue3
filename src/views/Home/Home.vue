@@ -40,8 +40,72 @@
           <feature-card leftLineColor="#C2A341" title="轻纺产业两链融合实验区 拷贝"
             des="深入贯彻落实省市关于秦创原创新驱动平台建设的总体安排部署，聚集创新资源、提升创新动能、构建创新生态，在现有榆阳轻纺产业园基础上， 根据轻纺产业创新需求和发展短板，统筹各类创新资源，促进科技成果转化落地，解决断点赌点痛点问题，促进榆阳轻纺产业高质量发展。" />
         </div>
-        <div class="feature-layout-image-box" style="{}">
-          <img :src="card1Image" />
+        <div class="feature-layout-image-box">
+          <!-- <img :src="card1Image" /> -->
+          <Map ></Map>
+          <div class="shjdBox">
+            <div style="margin: 230px 0 100px 290px;">
+              <i class="qcyIcon"></i>
+            </div>
+            <div class="sms_Map2" style="background-color: #094fa3cc; top: 110px;left: 300px;">
+                煤化工产业<br>两链融合试验区
+              <i style="top: 15px; left: 70px"></i>
+            </div>
+            <div class="sms_Map3" style="background-color: #00aeefcc; top: 170px;left: 405px;">
+                榆林经开区<br>中试孵化基地
+              <i style="top: 0px; left: -34px"></i>
+            </div>
+            <div class="sms_Map4" style="background-color: #094fa3cc; top: 151px;left: 285px;">
+                轻纺产业<br>两链融合试验区
+              <i style="top: 11px;  left: 23px"></i>
+            </div>
+            <div class="sms_Map5" style="background-color: #094fa3cc; top: 70px;left: 370px;">
+                镁铝合金产业<br>两链融合试验区
+              <i style="top: 14px;  left: 43px"></i>
+            </div>
+            <div class="sms_Map6" style="background-color: #eeb749cc; top: 138px;left: 193px;">
+                秦创原(榆林)<br>成果转化中心
+              <i style="top: 11px;  left: 63px"></i>
+            </div>
+            <div class="sms_Map7" style="background-color: #eeb749cc; top: 178px;left: 170px;">
+                秦创原(榆林)<br>技术研发中心
+              <i style="top: 5px;  left: 75px"></i>
+            </div>
+            <div class="sms_Map8" style="background-color: rgba(237, 51, 51, 0.8); width: 120px; top: 225px;left: 100px;">
+                秦创原(榆林)<br>创新促进中心(副中心)
+              <i style="top: -16px;  left: 115px"></i>
+            </div>
+            <div class="sms_Map9" style="background-color: #00aeefcc; top: 270px;left: 170px;">
+                榆林高新区<br>中试孵化基地
+            </div>
+            <div class="sms_Map10" style="background-color: #094fa3cc; width: 110px; top: 349px;left: 120px;">
+                智能无人系统产业<br>两链融合试验区
+                <i style="top: -62px;  left: 64px"></i>
+            </div>
+            <div class="sms_Map11" style="background-color: #094fa3cc; top: 285px;left: 365px;">
+                小米产业<br>两链融合试验区
+                <i style="top: -21px;  left: -35px"></i>
+            </div>
+          </div>
+          <div class="sms_xxxq">
+            <i></i>
+            <el-image class="img" :src="xxxqImage" fit="cover"></el-image>
+            <div class="xxxq">
+              <span class="icon"></span><span class="xx-text">秦创原(榆林)创新促进中心(主中心)</span>
+            </div>
+          </div>
+          <div class="sms_title1">
+            榆林经济开发区
+          </div>
+          <div class="sms_title2">
+            榆林学院
+          </div>
+          <div class="sms_title3">
+            科创新城
+          </div>
+          <div class="sms_title4">
+            榆林高新区
+          </div>
         </div>
       </div>
     </div>
@@ -87,10 +151,13 @@ import card5Image from '../../assets/images/5.png'
 import card6Image from '../../assets/images/6.png'
 import card7Image from '../../assets/images/7.png'
 import card8Image from '../../assets/images/8.png'
+import xxxqImage from '../../assets/images/xxxq.png'
 import homeBaseCardImage from '../../assets/images/home-base-card-image.png'
 import { listNewsTrends } from "../../api/system/newsTrends";
 import { listPolicyInitiative } from "../../api/system/policyInitiative";
 import { statistics } from "../../api/system/index/chain";
+import { listDistributionArea } from "../../api/system/distributionArea";
+import Map from "./map"
 
 const { proxy } = getCurrentInstance()
 const router = useRouter()
@@ -118,6 +185,7 @@ const queryParams = ref({
 });
 const newsTrendsList = ref([]);
 const policyInitiativeList = ref([]);
+const distributionAreaList = ref([]);
 const imageUrl = ref("");
 /** 查询newsTrends列表 */
 function getNewsList() {
@@ -140,9 +208,17 @@ function getIndexStatistics() {
   })
 }
 
+function getDistributionAreaList() {
+  queryParams.value.pageSize = 0;
+  listDistributionArea(queryParams.value).then(res => {
+    distributionAreaList.value = res.rows;
+  })
+}
+
 getNewsList();
 getPolicyInitiative();
 getIndexStatistics();
+getDistributionAreaList();
 </script>
 
 <style scoped lang="less">
@@ -164,17 +240,14 @@ getIndexStatistics();
   display: flex;
   flex-direction: column;
   flex: 2;
-  grid-gap: 18px;
+  grid-gap: 30px;
 
 }
 
 .feature-layout-image-box {
   flex: 1;
-
-  img {
-    height: 100%;
-    width: 100%;
-  }
+  position: relative;
+  margin-top: -60px;
 }
 
 .width1200 {
@@ -195,4 +268,359 @@ getIndexStatistics();
   grid-gap: 35px;
 }
 
+
+// 地图相对定位的样式
+.shjdBox {
+  position: absolute;
+  top: 0;
+
+  div {
+    position: absolute;
+    width: 90px;
+    height: 40px;
+    border-radius: 6px;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    z-index: 100;
+    padding: 5px 0 0 8px;
+    cursor: pointer;
+    font-size: 11px;
+
+    i {
+      position: relative;
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: url(../../assets/images/index/logo.png) no-repeat center center/80%;
+      background-color: #ee1d23cc;
+    }
+  }
+}
+.qcyIcon {
+  width: 25px !important;
+    height: 25px !important;
+    border: 2px solid #fff;
+}
+.sms_Map2::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 40px;
+    left: 75px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(180deg);
+    border-width: 0 10px 12px 0;
+    z-index: 10;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map2 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -70px;
+    top: 47px;
+    transform: rotate(135deg);
+    width: 90px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_Map3::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 27px;
+    left: -12px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(1deg);
+    border-width: 0 0 10px 12px;
+    border-style: solid;
+    border-color: transparent transparent #00aeefcc transparent;
+}
+.sms_Map3 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -62px;
+    top: 25px;
+    transform: rotate(150deg);
+    width: 72px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_Map4::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 38px;
+    left: 28px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(180deg);
+    border-width: 0 10px 8px 0;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map4 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -12px;
+    top: 26px;
+    transform: rotate(115deg);
+    width: 27px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_Map5::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 40px;
+    left: 52px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(180deg);
+    border-width: 0 8px 10px 0;
+    z-index: 10;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map5 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -125px;
+    top: 67px;
+    transform: rotate(135deg);
+    width: 155px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+.sms_Map6::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 38px;
+    left: 70px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(180deg);
+    border-width: 0 10px 8px 0;
+    border-style: solid;
+    border-color: transparent transparent #eeb749cc transparent;
+}
+.sms_Map6 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 2px;
+    top: 34px;
+    transform: rotate(55deg);
+    width: 48px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_Map7::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 38px;
+    left: 75px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(180deg);
+    border-width: 0 10px 8px 0;
+    border-style: solid;
+    border-color: transparent transparent #eeb749cc transparent;
+}
+.sms_Map7 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 13px;
+    top: 20px;
+    transform: rotate(25deg);
+    width: 40px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+
+.sms_Map8::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 120px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(90deg);
+    border-width: 0 0 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent rgba(237, 51, 51, 0.8) transparent;
+}
+.sms_Map8 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 14px;
+    top: 5px;
+    transform: rotate(180deg);
+    width: 65px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_Map9::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -11px;
+    left: 60px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(90deg);
+    border-width: 0 0 10px 11px;
+    border-style: solid;
+    border-color: transparent transparent #00aeefcc transparent;
+}
+
+.sms_Map10::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -11px;
+    left: 78px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(90deg);
+    border-width: 0 0 10px 11px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map10 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: -34px;
+    transform: rotate(140deg);
+    width: 122px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+.sms_Map11::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 15px;
+    left: -10px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(0deg);
+    border-width: 0 0 10px 12px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map11 i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -40px;
+    top: -23px;
+    transform: rotate(58deg);
+    width: 55px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_xxxq {
+  position: absolute;
+  background-color: #fff;
+  padding: 5px;
+  margin: -85px 0 0 180px;
+  border: 2px solid rgba(238, 29, 35, 0.8);
+  width: 155px;
+    height: 142px;
+    align-items: center;
+
+  .img {
+    width: 140px;
+    height: 130px;
+  }
+
+  .xxxq {
+    margin-top: -20px;
+    margin-left: -35px;
+    position: absolute;
+    display: flex; 
+    align-items: center;
+    width: 215px;
+    padding: 3px 6px;
+    background-color: #ee1d23cc;
+    border-radius: 5px;
+  }
+
+  .icon {
+      display: block;
+      width: 18px;
+      height: 18px;
+      line-height: 20px;
+      // border-radius: 50%;
+      background: url(../../assets/images/index/logo.png) no-repeat center center/80%;
+      // background-color: #ee1d23cc;
+    }
+
+  .xx-text {
+    font-size: 12px;
+    color: #fff;
+    line-height: 16px;
+    // background-color: #ee1d23cc;
+  }
+}
+
+.sms_xxxq i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 20px;
+    top: -85px;
+    transform: rotate(105deg);
+    width: 170px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_title1 {
+  font-size: 9px;
+  color: #000;
+  position: absolute;
+  margin: -278px 0 0 370px;
+}
+.sms_title2 {
+  font-size: 9px;
+  color: #000;
+  position: absolute;
+  margin: -297px 0 0 260px;
+}
+.sms_title3 {
+  font-size: 9px;
+  color: #000;
+  position: absolute;
+  margin: -280px 0 0 218px;
+}
+.sms_title4 {
+  font-size: 9px;
+  color: #000;
+  position: absolute;
+  margin: -248px 0 0 235px;
+}
 </style>

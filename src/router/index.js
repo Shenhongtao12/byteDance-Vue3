@@ -92,6 +92,12 @@ const routes = [
                         component: () => import('@/views/zhibiao/jishujiaoyi.vue'),
                         meta: { title: '技术交易' },
                     },
+                    {
+                        path: '/test',
+                        name: 'test',
+                        component: () => import('@/views/Home/map/index.vue'),
+                        meta: { title: '地图' },
+                    },
                 ]
             },
             {

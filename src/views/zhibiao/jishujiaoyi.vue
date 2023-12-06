@@ -30,7 +30,7 @@
       </div>
 
       <div class="tongji" style="margin-top: 30px;">
-        <div class="tj-bg" :style="{ backgroundImage: `url('${item.img}')` }" :key="index" v-for="(item, index) in echarsData.contractTypeList">
+        <div class="tj-bg" :style="getDivStyle(item.img)" :key="index" v-for="(item, index) in echarsData.contractTypeList">
           <div class="tj-jishu">
             <div>
               <span class="money">{{ item.amount }}</span>
@@ -55,7 +55,7 @@
       </div>
 
       <div class="tongji" style="margin-top: 30px;">
-        <div class="ly-bg" :style="{ backgroundImage: `url('${item.img}')` }" :key="index" v-for="(item, index) in echarsData.contractDomainList">
+        <div class="ly-bg" :style="getDivStyle(item.img)" :key="index" v-for="(item, index) in echarsData.contractDomainList">
           <div class="ly-domain">
             <div style="height: 40px; ">
               <span class="text" style="color: #333;">{{ item.type }}</span>
@@ -86,6 +86,10 @@ import img7 from "@/assets/images/index/jishujiaoyi/7.png";
 import img8 from "@/assets/images/index/jishujiaoyi/8.png";
 import img9 from "@/assets/images/index/jishujiaoyi/9.png";
 import img10 from "@/assets/images/index/jishujiaoyi/10.png";
+import img11 from "@/assets/images/index/jishujiaoyi/11.png";
+import img12 from "@/assets/images/index/jishujiaoyi/12.png";
+import img13 from "@/assets/images/index/jishujiaoyi/13.png";
+import img14 from "@/assets/images/index/jishujiaoyi/14.png";
 
 const heTongNumRef = ref(null);
 const heTongAmountRef = ref(null);
@@ -505,14 +509,48 @@ function initShanxiAmount() {
   chartInstance.setOption(options);
 }
 
+function getDivStyle(image) {
+  let bg = null;
+  switch(image) {
+    case 2: 
+      bg = `url(${img2})`;
+      break;
+    case 3: 
+      bg = `url(${img3})`;
+      break;
+    case 4: 
+      bg = `url(${img4})`;
+      break;
+    case 5: 
+      bg = `url(${img5})`;
+      break;
+    case 11: 
+      bg = `url(${img11})`;
+      break;
+    case 12: 
+      bg = `url(${img12})`;
+      break;
+    case 13: 
+      bg = `url(${img13})`;
+      break;
+    case 14: 
+      bg = `url(${img14})`;
+      break;
+  }
+  return {
+    backgroundImage: bg
+    // 其他背景样式
+  };
+}
+
 const echarsData = ref({});
 
 function getList() {
   echars().then((res) => {
     echarsData.value = res.data;
     for(let i=0;i<echarsData.value.contractTypeList.length;i++) {
-      echarsData.value.contractTypeList[i].img = '/src/assets/images/index/jishujiaoyi/' + (i+2) + ".png";
-      echarsData.value.contractDomainList[i].img = '/src/assets/images/index/jishujiaoyi/' + (i+11) + ".png";
+      echarsData.value.contractTypeList[i].img =  (i+2);
+      echarsData.value.contractDomainList[i].img = + (i+11);
     }
     initHeTongNum();
     initHeTongAmount();
