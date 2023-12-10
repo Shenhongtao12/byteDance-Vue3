@@ -33,14 +33,17 @@
     </div>
     <div class="width1200">
       <part-title title="功能布局" />
-      <div class="feature-layout">
+      <el-skeleton v-if="showDistributionAreaList.length == 0" :rows="14" />
+      <div v-else class="feature-layout">
         <div class="feature-layout-card-box">
-          <feature-card leftLineColor="#C2A341" title="榆林高新区中试孵化基地"
-            des="中试解化基地践行“多能融合”理念，致力于新材料、精细化工、节能环保等领域的关键技术突破、共性技术研发、技术系统集成、科技成果中试及转化、 工程化示范应用等，打造省级能源革命创新示范基地，推进榆林国家级能源革命创新示范区建设。" />
-          <feature-card leftLineColor="#0062A8" title="轻纺产业两链融合实验区"
-            des="深入贯彻落实省市关于秦创原创新驱动平台建设的总体安排部署，聚集创新资源、提升创新动能、构建创新生态，在现有榆阳轻纺产业园基础上， 根据轻纺产业创新需求和发展短板，统筹各类创新资源，促进科技成果转化落地，解决断点赌点痛点问题，促进榆阳轻纺产业高质量发展。" />
-          <feature-card leftLineColor="#C2A341" title="轻纺产业两链融合实验区 拷贝"
-            des="深入贯彻落实省市关于秦创原创新驱动平台建设的总体安排部署，聚集创新资源、提升创新动能、构建创新生态，在现有榆阳轻纺产业园基础上， 根据轻纺产业创新需求和发展短板，统筹各类创新资源，促进科技成果转化落地，解决断点赌点痛点问题，促进榆阳轻纺产业高质量发展。" />
+          <feature-card v-for="(item,index) in showDistributionAreaList" :key="index" 
+            @clicked="switchDitu"
+            :leftLineColor="index % 2 == 0 ? '#C2A341' : '#0062A8'" 
+            :title="item.title"
+            :des="item.content" 
+            :index="index"
+            :isActive="index == activeIndex"
+          />
         </div>
         <div class="feature-layout-image-box">
           <!-- <img :src="card1Image" /> -->
@@ -49,63 +52,127 @@
             <div style="margin: 230px 0 100px 290px;">
               <i class="qcyIcon"></i>
             </div>
-            <div class="sms_Map2" style="background-color: #094fa3cc; top: 110px;left: 300px;">
-                煤化工产业<br>两链融合试验区
+            <div class="sms_Map2" :class="{ 'box--active': isBoxActive[0] }" 
+              @click="toggleBox(0)" 
+              style="background-color: #094fa3cc; top: 110px;left: 300px;"
+            >
+                <span>煤化工产业<br>两链融合试验区</span>
+            </div>
+            <div class="sms_Map2_icon">
               <i style="top: 15px; left: 70px"></i>
             </div>
-            <div class="sms_Map3" style="background-color: #00aeefcc; top: 170px;left: 405px;">
-                榆林经开区<br>中试孵化基地
-              <i style="top: 0px; left: -34px"></i>
+            <div class="sms_Map3" :class="{ 'box--active': isBoxActive[1] }" 
+              @click="toggleBox(1)"
+              style="background-color: #00aeefcc; top: 170px;left: 405px;transform-origin: bottom left;"
+            >
+              <span>榆林经开区<br>中试孵化基地</span>
+              <!-- <i style="top: 0px; left: -34px"></i> -->
             </div>
-            <div class="sms_Map4" style="background-color: #094fa3cc; top: 151px;left: 285px;">
-                轻纺产业<br>两链融合试验区
-              <i style="top: 11px;  left: 23px"></i>
+            <div class="sms_Map3_icon">
+              <i></i>
             </div>
-            <div class="sms_Map5" style="background-color: #094fa3cc; top: 70px;left: 370px;">
+            <div class="sms_Map4"
+              :class="{ 'box--active': isBoxActive[2] }" 
+              @click="toggleBox(2)"
+              style="background-color: #094fa3cc; top: 151px;left: 285px;transform-origin: bottom center;"
+            >
+              <span>轻纺产业<br>两链融合试验区</span>
+              <!-- <i style="top: 11px;  left: 23px"></i> -->
+            </div>
+            <div class="sms_Map4_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map5"
+              :class="{ 'box--active': isBoxActive[3] }" 
+              @click="toggleBox(3)"
+              style="background-color: #094fa3cc; top: 70px;left: 370px;transform-origin: bottom center;">
                 镁铝合金产业<br>两链融合试验区
-              <i style="top: 14px;  left: 43px"></i>
+              <!-- <i style="top: 14px;  left: 43px"></i> -->
             </div>
-            <div class="sms_Map6" style="background-color: #eeb749cc; top: 138px;left: 193px;">
+            <div class="sms_Map5_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map6" 
+              :class="{ 'box--active': isBoxActive[4] }" 
+              @click="toggleBox(4)"
+              style="background-color: #eeb749cc; top: 138px;left: 193px;"
+            >
                 秦创原(榆林)<br>成果转化中心
-              <i style="top: 11px;  left: 63px"></i>
+              <!-- <i style="top: 11px;  left: 63px"></i> -->
             </div>
-            <div class="sms_Map7" style="background-color: #eeb749cc; top: 178px;left: 170px;">
+            <div class="sms_Map6_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map7" 
+              :class="{ 'box--active': isBoxActive[5] }" 
+              @click="toggleBox(5)"
+              style="background-color: #eeb749cc; top: 178px;left: 170px;"
+            >
                 秦创原(榆林)<br>技术研发中心
-              <i style="top: 5px;  left: 75px"></i>
+              <!-- <i style="top: 5px;  left: 75px"></i> -->
             </div>
-            <div class="sms_Map8" style="background-color: rgba(237, 51, 51, 0.8); width: 120px; top: 225px;left: 100px;">
+            <div class="sms_Map7_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map8" 
+              :class="{ 'box--active': isBoxActive[6] }" 
+              @click="toggleBox(6)"
+              style="background-color: rgba(237, 51, 51, 0.8); width: 120px; top: 225px;left: 100px; transform-origin: center right;">
                 秦创原(榆林)<br>创新促进中心(副中心)
-              <i style="top: -16px;  left: 115px"></i>
+              <!-- <i style="top: -16px;  left: 115px"></i> -->
             </div>
-            <div class="sms_Map9" style="background-color: #00aeefcc; top: 270px;left: 170px;">
+            <div class="sms_Map8_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map9" 
+              :class="{ 'box--active': isBoxActive[7] }" 
+              @click="toggleBox(7)"
+              style="background-color: #00aeefcc; top: 270px;left: 170px;transform-origin: top center;">
                 榆林高新区<br>中试孵化基地
             </div>
-            <div class="sms_Map10" style="background-color: #094fa3cc; width: 110px; top: 349px;left: 120px;">
+            <div class="sms_Map10" 
+              :class="{ 'box--active': isBoxActive[8] }" 
+              @click="toggleBox(8)"
+              style="background-color: #094fa3cc; width: 110px; top: 349px;left: 140px;transform-origin: top center;"
+            >
                 智能无人系统产业<br>两链融合试验区
-                <i style="top: -62px;  left: 64px"></i>
+                <!-- <i style="top: -62px;  left: 64px"></i> -->
             </div>
-            <div class="sms_Map11" style="background-color: #094fa3cc; top: 285px;left: 365px;">
+            <div class="sms_Map10_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map11" 
+              :class="{ 'box--active': isBoxActive[9] }" 
+              @click="toggleBox(9)"
+              style="background-color: #094fa3cc; top: 285px;left: 365px; z-index: 201;transform-origin: left center;"
+            >
                 小米产业<br>两链融合试验区
-                <i style="top: -21px;  left: -35px"></i>
+                <!-- <i style="top: -21px;  left: -35px"></i> -->
+            </div>
+            <div class="sms_Map11_icon">
+              <i></i>
             </div>
           </div>
           <div class="sms_xxxq">
             <i></i>
             <el-image class="img" :src="xxxqImage" fit="cover"></el-image>
-            <div class="xxxq">
+            <div class="xxxq" 
+              :class="{ 'box--active': isBoxActive[10] }" 
+              @click="toggleBox(10)"
+            >
               <span class="icon"></span><span class="xx-text">秦创原(榆林)创新促进中心(主中心)</span>
             </div>
           </div>
-          <div class="sms_title1">
-            榆林经济开发区
+          <div class="sms_title1" :class="{ 'box--active': isBoxActive[11] }" @click="toggleBox(11)">
+            <span>榆林经济开发区</span>
           </div>
-          <div class="sms_title2">
+          <div class="sms_title2" :class="{ 'box--active': isBoxActive[12] }" @click="toggleBox(12)">
             榆林学院
           </div>
-          <div class="sms_title3">
+          <div class="sms_title3" :class="{ 'box--active': isBoxActive[13] }" @click="toggleBox(13)">
             科创新城
           </div>
-          <div class="sms_title4">
+          <div class="sms_title4" :class="{ 'box--active': isBoxActive[14] }" @click="toggleBox(14)">
             榆林高新区
           </div>
         </div>
@@ -176,6 +243,87 @@ const indexStatistics = ref({
   platform: 0,
 });
 
+const titleMapping = ref([
+  {
+    title: "煤化工产业",
+    index: 0
+  },
+  {
+    title: "榆林经开区",
+    index: 1
+  },
+  {
+    title: "轻纺产业",
+    index: 2
+  },
+  {
+    title: "镁铝合金产业",
+    index: 3
+  },
+  {
+    title: "成果转化中心",
+    index: 4
+  },
+  {
+    title: "技术研发中心",
+    index: 5
+  },
+  {
+    title: "副中心",
+    index: 6
+  },
+  {
+    title: "榆林高新区中试孵化基地",
+    index: 7
+  },
+  {
+    title: "智能无人系统产业",
+    index: 8
+  },
+  {
+    title: "小米产业",
+    index: 9
+  },
+  {
+    title: "主中心",
+    index: 10
+  },
+  {
+    title: "榆林经济开发区",
+    index: 11
+  },
+  {
+    title: "榆林学院",
+    index: 12
+  },
+  {
+    title: "科创新城",
+    index: 13
+  },
+  {
+    title: "榆林高新区",
+    index: 14
+  },
+])
+
+const isBoxActive = ref([false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]);
+const lastSelectDiqu = ref(null);
+const activeIndex = ref(1);
+
+function toggleBox(index, isNotDituClick) {
+  if (lastSelectDiqu.value != null && lastSelectDiqu.value != index) {
+    isBoxActive.value[lastSelectDiqu.value] = false;
+  }
+  
+  isBoxActive.value[index] = !isBoxActive.value[index];
+
+  if (!isNotDituClick) {
+    selectDitu(titleMapping.value.filter(x => x.index == index)[0].title, index);
+  }
+
+  lastSelectDiqu.value = index;
+}
+
 const queryParams = ref({
     pageNum: 1,
     pageSize: 6,
@@ -188,6 +336,7 @@ const queryParams = ref({
 const newsTrendsList = ref([]);
 const policyInitiativeList = ref([]);
 const distributionAreaList = ref([]);
+const showDistributionAreaList = ref([]);
 const imageUrl = ref("");
 /** 查询newsTrends列表 */
 function getNewsList() {
@@ -214,7 +363,83 @@ function getDistributionAreaList() {
   queryParams.value.pageSize = 0;
   listDistributionArea(queryParams.value).then(res => {
     distributionAreaList.value = res.rows;
+
+    selectShowDistributionAreaList(0);
+    if (distributionAreaList.value.length <= 3) {
+      activeIndex.value = 0;
+    }
+    const title = distributionAreaList.value[0].title;
+    const mappingIndex = titleMapping.value.findIndex(x => title.includes(x.title));
+    if (mappingIndex != -1) {
+      toggleBox(mappingIndex, true);
+    }
   })
+}
+
+function selectDitu(title, mappingIndex) {
+  let index;
+  if (title == "榆林高新区") {
+    index = distributionAreaList.value.findIndex(x => x.title == title);
+
+  } else {
+    index = distributionAreaList.value.findIndex(x => x.title.includes(title));
+  }
+  
+  if (index != -1) {
+    selectShowDistributionAreaList(index);
+    if (distributionAreaList.value.length <= 3) {
+      activeIndex.value = index;
+    } else {
+      activeIndex.value = 1;
+    }
+
+    if (lastSelectDiqu.value == mappingIndex && !isBoxActive.value[mappingIndex]) {
+      activeIndex.value = -1;
+    }
+    
+  }
+}
+
+function selectShowDistributionAreaList(index) {
+  if  (distributionAreaList.value.length <= 3) {
+    showDistributionAreaList.value = distributionAreaList.value;
+    return;
+  }
+  showDistributionAreaList.value = [];
+  if (index==0) {
+    // index 显示到中间位置，第一个就应该是showDistributionAreaList的最后一个
+    showDistributionAreaList.value.push(distributionAreaList.value[distributionAreaList.value.length - 1]);
+  } else {
+    showDistributionAreaList.value.push(distributionAreaList.value[index - 1]);
+  }
+
+  showDistributionAreaList.value.push(distributionAreaList.value[index]);
+
+  if(index == distributionAreaList.value.length - 1) {
+    showDistributionAreaList.value.push(distributionAreaList.value[0]);
+  } else {
+    showDistributionAreaList.value.push(distributionAreaList.value[index + 1]);
+  }
+
+}
+
+
+function switchDitu(data) {
+  const {title, index} = data;
+  if (index == activeIndex.value) {
+    activeIndex.value = -1;
+  } else {
+    activeIndex.value = index;
+  }
+  
+  if (title == "榆林高新区") {
+    toggleBox(14, true);
+    return
+  }
+  const mappingIndex = titleMapping.value.findIndex(x => title.includes(x.title));
+  if (mappingIndex != -1) {
+    toggleBox(mappingIndex, true);
+  }
 }
 
 getNewsList();
@@ -236,6 +461,7 @@ getDistributionAreaList();
 .feature-layout {
   display: flex;
   grid-gap: 34px;
+  min-height: 500px;
 }
 
 .feature-layout-card-box {
@@ -287,6 +513,8 @@ getDistributionAreaList();
     padding: 5px 0 0 8px;
     cursor: pointer;
     font-size: 11px;
+    transition: transform 0.3s;
+    transform-origin: bottom right;
 
     i {
       position: relative;
@@ -298,6 +526,10 @@ getDistributionAreaList();
       background-color: #ee1d23cc;
     }
   }
+}
+.tran-left{
+  transition: transform 0.3s;
+  transform-origin: bottom left;
 }
 .qcyIcon {
   width: 25px !important;
@@ -318,14 +550,22 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent #094fa3cc transparent;
 }
-.sms_Map2 i::after {
+
+.sms_Map2_icon {
+  position: absolute;
+  width: 0px;
+    height: 0px;
+    margin-top: 140px;
+    margin-left: 300px;
+}
+.sms_Map2_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
     left: -70px;
-    top: 47px;
+    top: 43px;
     transform: rotate(135deg);
-    width: 90px;
+    width:100px;
     height: 2px;
     background: #ee1d23cc;
 }
@@ -343,13 +583,21 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent #00aeefcc transparent;
 }
-.sms_Map3 i::after {
+
+.sms_Map3_icon {
+  position: absolute;
+  width: 0px;
+    height: 0px;
+    margin-top: 196px;
+    margin-left: 372px;
+}
+.sms_Map3_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
-    left: -62px;
+    left: -64px;
     top: 25px;
-    transform: rotate(150deg);
+    transform: rotate(152deg);
     width: 72px;
     height: 2px;
     background: #ee1d23cc;
@@ -368,14 +616,21 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent #094fa3cc transparent;
 }
-.sms_Map4 i::after {
+.sms_Map4_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 191px;
+  margin-left: 305px;
+}
+.sms_Map4_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
     left: -12px;
     top: 26px;
     transform: rotate(115deg);
-    width: 27px;
+    width: 30px;
     height: 2px;
     background: #ee1d23cc;
 }
@@ -394,12 +649,19 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent #094fa3cc transparent;
 }
-.sms_Map5 i::after {
+.sms_Map5_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 114px;
+  margin-left: 415px;
+}
+.sms_Map5_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
     left: -125px;
-    top: 67px;
+    top: 66px;
     transform: rotate(135deg);
     width: 155px;
     height: 2px;
@@ -418,7 +680,14 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent #eeb749cc transparent;
 }
-.sms_Map6 i::after {
+.sms_Map6_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 178px;
+  margin-left: 258px;
+}
+.sms_Map6_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
@@ -443,13 +712,20 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent #eeb749cc transparent;
 }
-.sms_Map7 i::after {
+.sms_Map7_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 215px;
+  margin-left: 245px;
+}
+.sms_Map7_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
     left: 13px;
-    top: 20px;
-    transform: rotate(25deg);
+    top: 15px;
+    transform: rotate(12deg);
     width: 40px;
     height: 2px;
     background: #ee1d23cc;
@@ -469,14 +745,21 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent rgba(237, 51, 51, 0.8) transparent;
 }
-.sms_Map8 i::after {
+.sms_Map8_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 236px;
+  margin-left: 220px;
+}
+.sms_Map8_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
     left: 14px;
-    top: 5px;
+    top: 8px;
     transform: rotate(180deg);
-    width: 65px;
+    width: 58px;
     height: 2px;
     background: #ee1d23cc;
 }
@@ -500,7 +783,7 @@ getDistributionAreaList();
     display: block;
     position: absolute;
     top: -11px;
-    left: 78px;
+    left: 60px;
     width: 0px;
     height: 0px;
     transform: rotate(90deg);
@@ -508,7 +791,14 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent #094fa3cc transparent;
 }
-.sms_Map10 i::after {
+.sms_Map10_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 320px;
+  margin-left: 188px;
+}
+.sms_Map10_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
@@ -532,7 +822,14 @@ getDistributionAreaList();
     border-style: solid;
     border-color: transparent transparent #094fa3cc transparent;
 }
-.sms_Map11 i::after {
+.sms_Map11_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 295px;
+  margin-left: 331px;
+}
+.sms_Map11_icon i::after {
     content: '';
     display: inline-block;
     position: absolute;
@@ -569,6 +866,8 @@ getDistributionAreaList();
     padding: 3px 6px;
     background-color: #ee1d23cc;
     border-radius: 5px;
+    cursor: pointer;
+    transform-origin: bottom center;
   }
 
   .icon {
@@ -606,23 +905,42 @@ getDistributionAreaList();
   color: #000;
   position: absolute;
   margin: -278px 0 0 370px;
+  z-index: 200;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 .sms_title2 {
   font-size: 9px;
   color: #000;
   position: absolute;
   margin: -297px 0 0 260px;
+  z-index: 200;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 .sms_title3 {
   font-size: 9px;
   color: #000;
   position: absolute;
   margin: -280px 0 0 218px;
+  z-index: 200;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 .sms_title4 {
   font-size: 9px;
   color: #000;
   position: absolute;
   margin: -248px 0 0 235px;
+  z-index: 200;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+
+// 动画
+.box--active {
+  transform: scale(2.0);
+  z-index: 1001 !important;
 }
 </style>
