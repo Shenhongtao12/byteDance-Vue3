@@ -2,7 +2,13 @@
     <div class="home-news-card block">
         <el-row style="width: 100%;">
             <el-col :span="10">
-                <el-image class="news-image" @click="openNews(image.id)" :src="image.url" fit="cover">
+                <el-image :class="{'pulse-enter-active':showAnimate}" 
+                    @mouseenter="play" 
+                    @mouseleave="reset"
+                    class="news-image" 
+                    @click="openNews(image.id)" 
+                    :src="image.url" fit="cover"
+                >
                     <template #error>
                     <div class="image-slot">
                         <el-icon><icon-picture /></el-icon>
@@ -14,6 +20,7 @@
                 <div class="news-list">
                     <div v-for="(item) in news" :key="item.url" 
                         @mouseover="handleMouseOver(item)"
+                        @mouseleave="reset2"
                         class="news-list-item"
                         @click="openNews(item.id)"
                     >
@@ -63,6 +70,17 @@ const { news, imageUrl } = toRefs(props);
 function goList() {
     router.push('/xinwen');
 }
+const selectImage = ref(false);
+const showAnimate = ref(false);
+function play() {
+    showAnimate.value = true;
+}
+function reset() {
+    showAnimate.value = false;
+}
+function reset2() {
+    selectImage.value = false;
+}
 
 onMounted(() => {
     image.value = {
@@ -73,10 +91,12 @@ onMounted(() => {
 
 // 鼠标移入时的处理函数
 const handleMouseOver = (item) => {
+    selectImage.value = true;
     image.value =  {
         url: baseUrl + item.coverUrl,
         id: item.id
     }
+    
 };
 
 function openNews(id) {
@@ -86,6 +106,21 @@ function openNews(id) {
   
 
 <style scoped>
+.fadeIn-enter-active {
+    animation: fadeIn 0.5s reverse
+}
+.pulse-enter-active {
+    animation: pulse 0.5s
+}
+.rotate360 {
+    animation:  rotate360 .5s ease-out 0s;
+}
+@keyframes rotate360 {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .home-news-card {
     font-size: 14px;
     display: flex;

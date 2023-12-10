@@ -1,6 +1,6 @@
 <template>
-  <div id="box" v-if="slideList.length > 0">
-    <div class="banner">
+  <div id="box">
+    <div class="banner" v-if="slideList.length > 0">
       <!--切换图片-->
       <div class="bannerImg">
         <transition-group name="fade" tag="ul" class="slideUl">
@@ -10,6 +10,7 @@
             v-show="index === currentIndex"
             @mouseenter="stop()"
             @mouseleave="go()"
+            @click="open(link)"
           >
             <el-image class="img" :src="baseUrl + list.imageUrl" fit="cover">
             </el-image>
@@ -17,7 +18,11 @@
         </transition-group>
       </div>
       <!-- 图片上层内容 -->
-      <div class="bannerTextBox">
+      <div class="bannerTextBox"  
+        @mouseenter="stop()"
+        @mouseleave="go()"
+        @click="open(link)"
+      >
         <div class="bannerText">
           <span class="title">{{ title }}</span>
           <div class="content">
@@ -40,6 +45,7 @@
         </span>
       </div>
     </div>
+    <el-skeleton v-else :rows="7" />
   </div>
 </template>
 
@@ -54,6 +60,13 @@ const timer = ref(null); // 自动切换的定时器
 
 const title = ref("");
 const content = ref("");
+const link = ref("");
+
+function open(link) {
+  if (link) {
+    window.location.href = link;
+  }
+}
 
 function getList() {
   const queryParams = {
@@ -65,6 +78,7 @@ function getList() {
     if (response.rows && response.rows.length > 0) {
       title.value = response.rows[0].title;
       content.value = response.rows[0].content;
+      link.value = response.rows[0].link;
     }
   });
 }
@@ -77,6 +91,7 @@ function play() {
     }
     title.value = slideList.value[currentIndex.value].title;
     content.value = slideList.value[currentIndex.value].content;
+    link.value = slideList.value[currentIndex.value].link;
   }, 3000);
 }
 function stop() {
@@ -89,6 +104,7 @@ function change(index) {
   currentIndex.value = index;
   title.value = slideList.value[index].title;
   content.value = slideList.value[index].content;
+  link.value = slideList.value[index].link;
   stop();
 }
 
@@ -109,6 +125,7 @@ a {
   height: 400px;
   margin: 20px auto;
   position: relative;
+  cursor: pointer;
 }
 .bannerImg .img {
   width: 100%;

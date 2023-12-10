@@ -7,6 +7,7 @@ import store from "./store";
 import ElementPlus from 'element-plus'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import 'animate.css';
 
 import { parseTime, resetForm, addDateRange } from '@/utils/ruoyi'
 

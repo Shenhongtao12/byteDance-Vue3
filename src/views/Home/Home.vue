@@ -6,6 +6,7 @@
     <div class="width1200">
       <part-title title="新闻动态" :is-link="true" link="/xinwen" />
       <news-card v-if="newsTrendsList.length > 0" :news="newsTrendsList" :imageUrl="imageUrl"></news-card>
+      <el-skeleton v-else :rows="6" />
     </div>
     <div class="width1200">
       <part-title title="政策举措" :is-link="true" link="/zhengce" />
@@ -15,6 +16,7 @@
           :description="item.content" />
         </div>
       </div>
+      <el-skeleton v-else :rows="5" />
     </div>
     <div class="width1200">
       <part-title title="指标展示" />

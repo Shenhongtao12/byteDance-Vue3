@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Header title="科技政策" @search="handleSearch" />
+    <Header title="成果转化" @search="handleSearch" />
   </div>
   <div style="margin: auto; width: 1200px; margin-bottom: 50px">
     <div style="background-color: #fff">
       <div class="type">
-        <span class="title">政策解读</span>
+        <span class="title">企业名单</span>
         <div style="display: flex; flex-wrap: wrap">
           <span
             class="tags"
@@ -29,51 +29,35 @@
       >
         <el-table-column type="index" align="center" label="序号" width="80" />
         <el-table-column
-          prop="abstractStr"
+          :show-overflow-tooltip="true"
+          prop="enterpriseName"
           align="center"
-          label="政策内容"
+          label="企业名称"
+        />
+        <el-table-column
+          :show-overflow-tooltip="true"
+          prop="domain"
+          align="center"
+          label="领域"
+        />
+        <el-table-column
+          prop="authTime"
+          align="center"
+          label="认证时间"
+          width="180"
         >
           <template #default="scope">
-            <el-tooltip
-              class="box-item"
-              effect="dark"
-              :content="scope.row.abstractStr"
-              placement="top"
-            >
-              <div class="cell-content">
-                {{ scope.row.abstractStr }}
-              </div>
-            </el-tooltip>
-          </template>
-        </el-table-column>
-        <el-table-column prop="intro" align="center" label="政策来源">
-          <template #default="scope">
-            <el-link class="cell-content" type="primary" 
-              :href="scope.row.link" 
-              target="_blank"
-              style="color: #409eff;"
-              :underline="false"
-            >
-              {{ scope.row.source }}
-            </el-link>
+            <span>{{ parseTime(scope.row.authTime, "{y}-{m}-{d}") }}</span>
           </template>
         </el-table-column>
         <el-table-column
-          v-if="lastSelectType == 0"
           :show-overflow-tooltip="true"
-          prop="type"
-          width="220px"
+          v-if="lastSelectType == 0"
+          width="150px"
+          prop="authType"
           align="center"
-          label="政策类型"
+          label="认证类型"
         />
-        <el-table-column :show-overflow-tooltip="true" label="" width="100" align="center" class-name="small-padding fixed-width">
-        <template #default="scope">
-          <el-button
-            type="primary" link
-            @click="zixun($event, scope.row)"
-          >我要咨询</el-button>
-        </template>
-      </el-table-column>
       </el-table>
       <div class="page">
         <pagination
@@ -87,16 +71,12 @@
       </div>
     </div>
   </div>
-  <ZixunForm ref="zixunDialogRef" :demandType="3" />
 </template>
 <script setup>
 import Header from "@/components/zhibiao/zhibiao-header.vue";
 import { listSelectConfig } from "@/api/system/selectConfig";
-import { listOlicy, group } from "@/api/system/index/olicy";
-import { ref, getCurrentInstance } from "vue";
-import ZixunForm from "@/components/zixun-form"
-
-const { proxy } = getCurrentInstance();
+import { listCultivate, group } from "@/api/system/index/cultivate";
+import { ref } from "vue";
 
 const selectConfigList = ref([
   {
@@ -111,25 +91,16 @@ const total = ref(0);
 const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
-  type: null,
-  abstractStr: null,
+  authType: null,
+  enterpriseName: null,
 });
 
 const loading = ref(false);
 
 const tableData = ref([]);
 
-// 打开咨询的对话框
-function zixun(event, row) {
-  event.stopPropagation(); // 阻止事件冒泡
-  const start = row.source.trim().startsWith("《") ? "" : "《";
-  const end = row.source.trim().endsWith("》") ? "" : "》";
-  const content = "咨询关于" + (start) + row.source + (end) +", “" + row.abstractStr + "”的相关问题";
-  proxy.$refs["zixunDialogRef"].openDialog(content);
-}
-
 function handleSearch(value) {
-  queryParams.value.abstractStr = value;
+  queryParams.value.enterpriseName = value;
   getList();
 }
 function setClicked(index) {
@@ -147,7 +118,7 @@ function getRencaiTypeList() {
   const queryParams = {
     pageNum: 1,
     pageSize: 5000,
-    type: "指标管理-科技政策-政策类型",
+    type: "指标管理-成果转化-赛道分类",
   };
   listSelectConfig(queryParams).then((response) => {
     group().then((result) => {
@@ -184,15 +155,15 @@ const tableRowClassName = ({ row, rowIndex }) => {
 function getList() {
   loading.value = true;
   const config = selectConfigList.value[lastSelectType.value];
-  const type = config.text;
-  queryParams.value.type = type == "全部" ? null : type;
-  listOlicy(queryParams.value).then((res) => {
+  const authType = config.text;
+  queryParams.value.authType = authType == "全部" ? null : authType;
+  listCultivate(queryParams.value).then((res) => {
     tableData.value = res.rows;
     total.value = res.total;
     loading.value = false;
-    if (config.num != res.total && !queryParams.value.abstractStr) {
+    if (config.num != res.total && !queryParams.value.enterpriseName) {
       config.num = res.total;
-      if (type != "全部") {
+      if (authType != "全部") {
         selectConfigList.value[0].num = selectConfigList.value
           .filter((y) => y.text !== "全部")
           .map((x) => x.num)
@@ -248,14 +219,6 @@ getRencaiTypeList();
   justify-content: end;
   padding: 25px 16px;
   background-color: #fff;
-}
-.cell-content {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
 }
 </style>
 <style>

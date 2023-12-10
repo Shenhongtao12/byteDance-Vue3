@@ -59,7 +59,7 @@
             </template>
           </el-dropdown>
         </li>
-        <router-link
+        <!-- <router-link
           exact
           to="/qinchuangyuan3665"
           v-slot="{ href, navigate, isActive }"
@@ -67,7 +67,7 @@
           <li class="navbar-item" :class="{ active: isActive }">
             <a :href="href" @click="navigate">秦创原'3665'战略</a>
           </li>
-        </router-link>
+        </router-link> -->
         <li class="navbar-item">
           <a
             href="https://www.qinchuangyuan.com:443/html/web/about/index.html"
@@ -79,11 +79,9 @@
 
       <div class="user">
         <div class="login">
-          <router-link to="/login" v-slot="{ href, navigate, isActive }">
-            <li class="navbar-item" :class="{ active: isActive }">
-              <a :href="href" @click="navigate">登录</a>
-            </li>
-          </router-link>
+          <li class="navbar-item">
+            <a href="https://www.qinchuangyuan.com/html/web/shouye/denglu/index.html">登录</a>
+          </li>
         </div>
       </div>
     </div>

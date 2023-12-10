@@ -96,6 +96,7 @@ const heTongAmountRef = ref(null);
 const hetongTypeRef = ref(null);
 const shanxiRef = ref(null);
 onMounted(() => {
+  window.scrollTo(0, 0);
   getList();
 });
 

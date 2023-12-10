@@ -93,6 +93,12 @@ const routes = [
                         meta: { title: '技术交易' },
                     },
                     {
+                        path: '/chengguozhuanhua',
+                        name: 'chengguozhuanhua',
+                        component: () => import('@/views/zhibiao/chengguozhuanhua.vue'),
+                        meta: { title: '技术交易' },
+                    },
+                    {
                         path: '/test',
                         name: 'test',
                         component: () => import('@/views/Home/map/index.vue'),
@@ -116,7 +122,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     // 在每次路由跳转之前触发
-    window.scrollTo(0, 0); // 将滚动条回到顶部
+    // window.scrollTo(0, 0); // 将滚动条回到顶部
     next(); // 继续导航
   });
 

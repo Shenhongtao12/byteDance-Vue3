@@ -28,24 +28,14 @@
           style="width: 100%; min-height: 200px;"
         >
           <el-table-column type="index" align="center" label="序号" width="80" />
-          <el-table-column
-            :show-overflow-tooltip="true"
-            prop="expertName"
-            align="center"
-            label="姓名"
-          />
-          <el-table-column
-            :show-overflow-tooltip="true"
-            prop="enterprise"
-            align="center"
-            label="工作单位"
-          />
-          <el-table-column
-            :show-overflow-tooltip="true"
-            prop="nature"
-            align="center"
-            label="工作性质"
-          />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.expertName" :label="tablePropertySetup.expertName" align="center" prop="expertName" width="120" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.politicalStatus" :label="tablePropertySetup.politicalStatus" align="center" prop="politicalStatus" width="100" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.enterprise" :label="tablePropertySetup.enterprise" align="center" prop="enterprise" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.nature" :label="tablePropertySetup.nature" align="center" prop="nature" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.cooperationUnit" :label="tablePropertySetup.cooperationUnit" align="center" prop="cooperationUnit" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.position" :label="tablePropertySetup.position" align="center" prop="position" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.workContent" :label="tablePropertySetup.workContent" align="center" prop="workContent" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.expertType" :label="tablePropertySetup.expertType" align="center" prop="expertType" />
         </el-table>
         <div class="page">
           <pagination
@@ -81,16 +71,121 @@ const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
   expertType: null,
-  enterpriseName: null
+  expertName: null,
+  enterprise: null,
+  params: {
+    userSort: true // 让后台知道是前台UI在查询
+  }
 });
+
+
+const tablePropertySetup = ref({});
+
+function selectionChange(value) {
+  let property;
+  switch (value) {
+    case "农业特派员": 
+      property = nongYe()
+      break;
+    case "工业特派员": 
+      property = gongye()
+      break;
+    case "三区人才": 
+      property = sanqurencai()
+      break;
+    case "科技经纪人": 
+      property = kejijingjiren()
+      break;
+    case "科学家工程师队伍": 
+      property = kexuejia()
+      break;
+    case "新双创团队": 
+      property = xinshuangchuang()
+      break;
+    default:
+      property = noSelection()
+      break;
+  }
+  tablePropertySetup.value = property;
+}
+
+function noSelection() {
+  return {
+    expertName: "专家姓名",
+    politicalStatus: "政治面貌",
+    enterprise: "工作单位",
+    nature: "工作性质",
+    // cooperationUnit: "协作单位",
+    expertType: "专家类型",
+    position: "职务",
+    workContent: "工作内容"
+  }
+}
+function nongYe() {
+  return {
+    expertName: "特派员姓名",
+    enterprise: "产业团",
+    nature: "技术职称",
+    position: "职位",
+  }
+}
+function gongye() {
+  return {
+    expertName: "姓名",
+    enterprise: "工作单位",
+    nature: "工作性质",
+  }
+}
+function sanqurencai() {
+  return {
+    expertName: "姓名",
+    politicalStatus: "政治面貌",
+    enterprise: "工作单位",
+    nature: "技术职称",
+    position: "职务",
+    workContent: "工作内容"
+  }
+}
+function kejijingjiren() {
+  return {
+    expertName: "姓名",
+    politicalStatus: "政治面貌",
+    enterprise: "工作单位",
+    nature: "技术职称",
+    expertType: "专家类型",
+    position: "职务",
+    workContent: "工作内容"
+  }
+}
+
+function kexuejia() {
+  return {
+    expertName: "首席科学家",
+    enterprise: "队伍名称",
+    cooperationUnit: "协作单位",
+    nature: "牵头单位",
+    position: "首席工程师",
+  }
+}
+
+function xinshuangchuang() {
+  return {
+    expertName: "姓名",
+    enterprise: "所在单位",
+    nature: "人才称号",
+    cooperationUnit: "联系方式",
+    position: "职务",
+  }
+}
 
 const loading = ref(false);
 
 const tableData = ref([]);
 
 function handleSearch(value) {
-  queryParams.value.enterpriseName = value;
-    getList();
+  queryParams.value.expertName = value;
+  queryParams.value.enterprise = value;
+  getList();
 }
 function setClicked(index) {
   if (lastSelectType.value != null) {
@@ -111,16 +206,24 @@ function getRencaiTypeList() {
   };
   listSelectConfig(queryParams).then((response) => {
     group().then(result => {
+      selectConfigList.value = [
+        {
+          text: "全部",
+          num: 0,
+          clicked: true,
+        },
+      ];
       for (let res of response.rows) {
-        const tmp = result.data.filter(x => x.type == res.value);
+        const tmp = result.data.filter((x) => x.type == res.value);
         selectConfigList.value.push({
           text: res.value,
-          num: tmp != null && tmp != undefined && tmp.length > 0 ? tmp[0].num : 0,
+          num:
+            tmp != null && tmp != undefined && tmp.length > 0 ? tmp[0].num : 0,
           clicked: false,
         });
       }
 
-      const tmp = result.data.filter(x => x.type === "全部");
+      const tmp = result.data.filter((x) => x.type === "全部");
       selectConfigList.value[0].num = tmp[0].num;
       getList();
     })
@@ -139,10 +242,11 @@ function getList() {
   const expertType = config.text;
   queryParams.value.expertType = expertType == "全部" ? null : expertType;
   listTalents(queryParams.value).then(res => {
+    selectionChange(expertType);
     tableData.value = res.rows;
     total.value = res.total;
     loading.value = false;
-    if (config.num != res.total) {
+    if (config.num != res.total && !queryParams.value.expertName) {
       config.num = res.total;
       if (expertType != "全部") {
         selectConfigList.value[0].num = selectConfigList.value.filter(y => y.text !== "全部")
