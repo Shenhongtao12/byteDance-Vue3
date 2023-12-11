@@ -82,10 +82,6 @@ const open = ref(false);
 const contentLabel = ref("");
 const dialogTitle = ref("");
 
-onMounted(() => {
-    
-})
-
 function openDialog(content) {
   reset();
   if (demandType.value == 1) {
@@ -100,6 +96,12 @@ function openDialog(content) {
     if (content != null) {
         form.value.content = content;
     }
+  }
+  let userInfo = localStorage.getItem('qcyUserInfo');
+  if (userInfo != null && userInfo != undefined) {
+    userInfo = JSON.parse(userInfo);
+    form.value.contact = userInfo.userName;
+    form.value.phone = userInfo.phone;
   }
   open.value = true;
 }

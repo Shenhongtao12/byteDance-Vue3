@@ -9,36 +9,9 @@ export function listConvert(query) {
   })
 }
 
-// 查询convert详细
-export function getConvert(id) {
+export function group(type) {
   return request({
-    url: '/system/convert/' + id,
-    method: 'get'
-  })
-}
-
-// 新增convert
-export function addConvert(data) {
-  return request({
-    url: '/system/convert',
-    method: 'post',
-    data: data
-  })
-}
-
-// 修改convert
-export function updateConvert(data) {
-  return request({
-    url: '/system/convert',
-    method: 'put',
-    data: data
-  })
-}
-
-// 删除convert
-export function delConvert(id) {
-  return request({
-    url: '/system/convert/' + id,
-    method: 'delete'
+    url: '/system/convert/group' + "?type=" + type,
+    method: 'get',
   })
 }

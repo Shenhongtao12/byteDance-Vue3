@@ -79,9 +79,13 @@
 
       <div class="user">
         <div class="login">
-          <li class="navbar-item">
+          <li class="navbar-item" v-if="!userName">
             <a href="https://www.qinchuangyuan.com/html/web/shouye/denglu/index.html">登录</a>
           </li>
+          <div v-else style="display: flex; align-items: center;">
+            <el-image style="width: 38px; height: 38px;" :src="avatar"></el-image>
+            <span>{{userName}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -89,8 +93,9 @@
 </template>
 <script setup>
 import { useStore } from "vuex";
-import { toRefs, getCurrentInstance, computed, ref } from "vue";
+import { toRefs, getCurrentInstance, computed, ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import avatar from "@/assets/avatar.png"
 
 const store = useStore();
 const router = useRouter();
@@ -108,6 +113,16 @@ const props = defineProps({
 });
 
 const { themeColor, fixedToTop } = toRefs(props);
+
+const userName = ref(null);
+
+onMounted(() => {
+  let userInfo = localStorage.getItem('qcyUserInfo');
+  if (userInfo != null && userInfo != undefined) {
+    userInfo = JSON.parse(userInfo);
+    userName.value = userInfo.userName;
+  }
+})
 </script>
 
 <style lang="less" scoped>

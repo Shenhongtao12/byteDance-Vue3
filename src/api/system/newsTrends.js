@@ -17,7 +17,7 @@ export function getNewsTrends(id) {
   })
 }
 
-// 修改newsTrends
+// 浏览量+1
 export function viewNewsTrends(data) {
   return request({
     url: '/system/newsTrends/view',

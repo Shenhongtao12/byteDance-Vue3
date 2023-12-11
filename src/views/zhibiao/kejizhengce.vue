@@ -67,13 +67,13 @@
           label="政策类型"
         />
         <el-table-column :show-overflow-tooltip="true" label="" width="100" align="center" class-name="small-padding fixed-width">
-        <template #default="scope">
-          <el-button
-            type="primary" link
-            @click="zixun($event, scope.row)"
-          >我要咨询</el-button>
-        </template>
-      </el-table-column>
+          <template #default="scope">
+            <el-button
+              type="primary" link
+              @click="zixun($event, scope.row)"
+            >我要咨询</el-button>
+          </template>
+        </el-table-column>
       </el-table>
       <div class="page">
         <pagination

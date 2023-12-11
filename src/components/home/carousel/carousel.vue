@@ -123,7 +123,7 @@ a {
 .banner {
   width: 100%;
   height: 400px;
-  margin: 20px auto;
+  margin: auto;
   position: relative;
   cursor: pointer;
 }

@@ -73,6 +73,7 @@ function openDialog() {
   font-size: 26px;
   font-weight: bold;
   margin: 0px 21px;
+  min-width: 104px;
 }
 
 .line {

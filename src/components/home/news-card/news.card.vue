@@ -180,6 +180,7 @@ function openNews(id) {
 
 .news-list-item>.date {
     color: #666666;
+    min-width: 78px;
 }
 
 .flex-1 {

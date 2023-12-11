@@ -202,8 +202,7 @@
 </template>
 
 <script setup>
-import { ref, getCurrentInstance, onMounted } from "vue";
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
 import IndicatorCard from '../../components/home/indicator-card/indicator-card.vue'
 import PolicyCard from '../../components/home/policy-card/policy-card.vue'
 import PartTitle from '../../components/home/part-title/part-title.vue'
@@ -228,8 +227,7 @@ import { statistics } from "../../api/system/index/chain";
 import { listDistributionArea } from "../../api/system/distributionArea";
 import Map from "./map"
 
-const { proxy } = getCurrentInstance()
-const router = useRouter()
+
 
 // 8项指标
 const indexStatistics = ref({
@@ -942,5 +940,15 @@ getDistributionAreaList();
 .box--active {
   transform: scale(2.0);
   z-index: 1001 !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
