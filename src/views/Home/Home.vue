@@ -35,15 +35,26 @@
       <part-title title="功能布局" />
       <el-skeleton v-if="showDistributionAreaList.length == 0" :rows="14" />
       <div v-else class="feature-layout">
-        <div class="feature-layout-card-box">
-          <feature-card v-for="(item,index) in showDistributionAreaList" :key="index" 
-            @clicked="switchDitu"
-            :leftLineColor="index % 2 == 0 ? '#C2A341' : '#0062A8'" 
-            :title="item.title"
-            :des="item.content" 
-            :index="index"
-            :isActive="index == activeIndex"
-          />
+        <div >
+          <div class="feature-layout-card-box">
+            <feature-card v-for="(item,index) in showDistributionAreaList" :key="index" 
+              @clicked="switchDitu"
+              :leftLineColor="index % 2 == 0 ? '#C2A341' : '#0062A8'" 
+              :title="item.title"
+              :des="item.content" 
+              :index="index"
+              :isActive="index == activeIndex"
+            />
+          </div>
+          <div class="buju">
+            <span
+              :key="index"
+              @click="pageChange(index)"
+              v-for="(item, index) in Math.ceil(distributionAreaList.length / 3)"
+              :class="{ active: index === currentIndex }"
+            >
+            </span>
+          </div>
         </div>
         <div class="feature-layout-image-box">
           <!-- <img :src="card1Image" /> -->
@@ -63,7 +74,7 @@
             </div>
             <div class="sms_Map3" :class="{ 'box--active': isBoxActive[1] }" 
               @click="toggleBox(1)"
-              style="background-color: #00aeefcc; top: 170px;left: 405px;transform-origin: bottom left;"
+              style="background-color: #00aeefcc; top: 170px;left: 405px;transform-origin: bottom left; z-index: 200;"
             >
               <span>榆林经开区<br>中试孵化基地</span>
               <!-- <i style="top: 0px; left: -34px"></i> -->
@@ -420,12 +431,30 @@ const isBoxActive = ref([false,false,false,false,false,false,false,false,false,f
 const lastSelectDiqu = ref(null);
 const activeIndex = ref(1);
 
-function toggleBox(index, isNotDituClick) {
+const currentIndex = ref(0);
+
+function pageChange(index) {
+  const title = distributionAreaList.value[index*3].title;
+  const mappingIndex = titleMapping.value.findIndex(x => title.includes(x.title));
+  if (mappingIndex != -1) {
+    currentIndex.value = index;
+    toggleBox(mappingIndex, false, true)
+  } else {
+    console.log("出现地图中未标点数据，请检查");
+    ElMessage.warning("数据异常，请联系管理员");
+  }
+}
+
+function toggleBox(index, isNotDituClick, isPageChange) {
   if (lastSelectDiqu.value != null && lastSelectDiqu.value != index) {
     isBoxActive.value[lastSelectDiqu.value] = false;
   }
   
-  isBoxActive.value[index] = !isBoxActive.value[index];
+  if (isPageChange) {
+    isBoxActive.value[index] = true;;
+  } else {
+    isBoxActive.value[index] = !isBoxActive.value[index];
+  }
 
   if (!isNotDituClick) {
     selectDitu(titleMapping.value.filter(x => x.index == index)[0].title, index);
@@ -571,14 +600,14 @@ getDistributionAreaList();
 .feature-layout {
   display: flex;
   grid-gap: 34px;
-  min-height: 500px;
+  min-height: 510px;
 }
 
 .feature-layout-card-box {
   display: flex;
   flex-direction: column;
   flex: 2;
-  grid-gap: 30px;
+  grid-gap: 25px;
 
 }
 
@@ -604,6 +633,30 @@ getDistributionAreaList();
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 35px;
+}
+
+.buju {
+  height: 12px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.buju span {
+  width: 12px;
+  height: 12px;
+  background: rgba(100, 100, 100, 0.6);
+  margin: 0 5px;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 12px;
+  text-align: center;
+  color: #333;
+  cursor: pointer;
+}
+.buju span.active {
+  background-color: #c2a341;
 }
 
 
