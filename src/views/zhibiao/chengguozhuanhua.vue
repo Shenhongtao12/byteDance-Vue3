@@ -118,6 +118,8 @@ const queryParams = ref({
 const loading = ref(false);
 const tableTypeNum = ref(1);
 const originZhuanhuaTypeList = ref([]);
+// zhuanhuaTypeList是包含数量的，由后台配置，如果以后需要统计真实数据库的数据则需要新写一个api
+// 将zhuanhuaTypeList替换为originZhuanhuaTypeList
 const zhuanhuaTypeList = ref([]);
 const lastZhuanhuaSelectType = ref(0);
 

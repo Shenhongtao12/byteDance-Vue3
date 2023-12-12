@@ -74,7 +74,7 @@
             <div class="sms_Map4"
               :class="{ 'box--active': isBoxActive[2] }" 
               @click="toggleBox(2)"
-              style="background-color: #094fa3cc; top: 151px;left: 285px;transform-origin: bottom center;"
+              style="background-color: #094fa3cc; top: 151px;left: 285px;transform-origin: bottom center; z-index: 200;"
             >
               <span>轻纺产业<br>两链融合试验区</span>
               <!-- <i style="top: 11px;  left: 23px"></i> -->
@@ -127,7 +127,7 @@
             <div class="sms_Map9" 
               :class="{ 'box--active': isBoxActive[7] }" 
               @click="toggleBox(7)"
-              style="background-color: #00aeefcc; top: 270px;left: 170px;transform-origin: top center;">
+              style="background-color: #00aeefcc; top: 270px;left: 170px;transform-origin: top center; z-index: 200;">
                 榆林高新区<br>中试孵化基地
             </div>
             <div class="sms_Map10" 
@@ -150,6 +150,86 @@
                 <!-- <i style="top: -21px;  left: -35px"></i> -->
             </div>
             <div class="sms_Map11_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map15" 
+              :class="{ 'box--active': isBoxActive[15] }" 
+              @click="toggleBox(15)"
+              style="background-color: #094fa3cc; top: 98px; left: 190px; width: 100px;"
+            >
+              秦创原榆林高技能<br>人才服务中心
+            </div>
+            <div class="sms_Map15_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map16" 
+              :class="{ 'box--active': isBoxActive[16] }" 
+              @click="toggleBox(16)"
+              style="background-color: #094fa3cc; top: 363px; left: 50px; transform-origin: top center;"
+            >
+              马铃薯产业<br>两链融合试验区
+            </div>
+            <div class="sms_Map16_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map17" 
+              :class="{ 'box--active': isBoxActive[17] }" 
+              @click="toggleBox(17)"
+              style="background-color: #094fa3cc; top: 315px; left: 220px; transform-origin: top center; z-index: 200;"
+            >
+              羊产业<br>两链融合试验区
+            </div>
+            <div class="sms_Map17_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map18" 
+              :class="{ 'box--active': isBoxActive[18] }" 
+              @click="toggleBox(18)"
+              style="background-color: #094fa3cc; top: 335px; left: 260px; transform-origin: top center; z-index: 200;"
+            >
+              中药材产业<br>两链融合试验区
+            </div>
+            <div class="sms_Map18_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map19" 
+              :class="{ 'box--active': isBoxActive[19] }" 
+              @click="toggleBox(19)"
+              style="background-color: #094fa3cc; top: 350px; left: 310px; transform-origin: top center; z-index: 200;"
+            >
+              山地苹果<br>两链融合试验区
+            </div>
+            <div class="sms_Map19_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map20" 
+              :class="{ 'box--active': isBoxActive[20] }" 
+              @click="toggleBox(20)"
+              style="background-color: #094fa3cc; top: 405px; left: 295px; transform-origin: top center; z-index: 200;"
+            >
+              红枣产业<br>两链融合试验区
+            </div>
+            <div class="sms_Map20_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map21" 
+              :class="{ 'box--active': isBoxActive[21] }" 
+              @click="toggleBox(21)"
+              style="background-color: #094fa3cc; top: 340px; left: 360px; transform-origin: top center; z-index: 200;"
+            >
+              空心挂面产业<br>两链融合试验区
+            </div>
+            <div class="sms_Map21_icon">
+              <i></i>
+            </div>
+            <div class="sms_Map22" 
+              :class="{ 'box--active': isBoxActive[22] }" 
+              @click="toggleBox(22)"
+              style="background-color: #094fa3cc; top: 240px; left: 378px; transform-origin: top left; z-index: 200;"
+            >
+              半导体及新材料<br>两链融合试验区
+            </div>
+            <div class="sms_Map22_icon">
               <i></i>
             </div>
           </div>
@@ -301,6 +381,38 @@ const titleMapping = ref([
   {
     title: "榆林高新区",
     index: 14
+  },
+  {
+    title: "人才服务中心",
+    index: 15
+  },
+  {
+    title: "马铃薯产业",
+    index: 16
+  },
+  {
+    title: "羊产业",
+    index: 17
+  },
+  {
+    title: "中药材产业",
+    index: 18
+  },
+  {
+    title: "山地苹果",
+    index: 19
+  },
+  {
+    title: "红枣产业",
+    index: 20
+  },
+  {
+    title: "空心挂面产业",
+    index: 21
+  },
+  {
+    title: "半导体及新材料",
+    index: 22
   },
 ])
 
@@ -839,6 +951,268 @@ getDistributionAreaList();
     background: #ee1d23cc;
 }
 
+.sms_Map15::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 39px;
+    left: 88px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(180deg);
+    border-width: 0px 10px 30px 0px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map15_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 160px;
+  margin-left: 270px;
+
+}
+.sms_Map15_icon i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -10px;
+    top: 42px;
+    transform: rotate(70deg);
+    width: 62px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_Map16::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -12px;
+    left: 45px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(0deg);
+    border-width: 0px 10px 12px 0px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map16_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 332px;
+  margin-left: 82px;
+
+}
+.sms_Map16_icon i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 5px;
+    top: -40px;
+    transform: rotate(155deg);
+    width: 218px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+.sms_Map17::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 45px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(0deg);
+    border-width: 0px 5px 5px 0px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map17_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 292px;
+  margin-left: 250px;
+
+}
+.sms_Map17_icon i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: -23px;
+    transform: rotate(130deg);
+    width: 60px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_Map18::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 53px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(0deg);
+    border-width: 0px 5px 5px 0px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map18_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 310px;
+  margin-left: 300px;
+
+}
+.sms_Map18_icon i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -25px;
+    top: -30px;
+    transform: rotate(83deg);
+    width: 58px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+.sms_Map19::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 45px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(0deg);
+    border-width: 0px 5px 5px 0px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map19_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 325px;
+  margin-left: 340px;
+
+}
+.sms_Map19_icon i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -60px;
+    top: -35px;
+    transform: rotate(63deg);
+    width: 85px;
+    height: 2px;
+    background: #ee1d23cc;
+}
+
+.sms_Map20::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 45px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(0deg);
+    border-width: 0px 5px 5px 0px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map20_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 380px;
+  margin-left: 325px;
+
+}
+.sms_Map20_icon i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -70px;
+    top: -65px;
+    transform: rotate(75deg);
+    width: 130px;
+    height: 2px;
+    background: #ee1d23cc;
+    
+}
+
+.sms_Map21::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -6px;
+    left: 40px;
+    width: 0px;
+    height: 0px;
+    transform: rotate(0deg);
+    border-width: 0px 6px 6px 0px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map21_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 315px;
+  margin-left: 383px;
+
+}
+.sms_Map21_icon i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -90px;
+    top: -32px;
+    transform: rotate(42deg);
+    width: 102px;
+    height: 2px;
+    background: #ee1d23cc;
+    
+}
+.sms_Map22::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -5px;
+    transform: rotate(0deg);
+    border-width: 0px 0px 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent #094fa3cc transparent;
+}
+.sms_Map22_icon {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin-top: 236px;
+  margin-left: 350px;
+
+}
+.sms_Map22_icon i::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: -38px;
+    top: 5px;
+    transform: rotate(180deg);
+    width: 38px;
+    height: 2px;
+    background: #ee1d23cc;
+    
+}
+
 .sms_xxxq {
   position: absolute;
   background-color: #fff;
@@ -938,7 +1312,7 @@ getDistributionAreaList();
 
 // 动画
 .box--active {
-  transform: scale(2.0);
+  transform: scale(1.8);
   z-index: 1001 !important;
 }
 

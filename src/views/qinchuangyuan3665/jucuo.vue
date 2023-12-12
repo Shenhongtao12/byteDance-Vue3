@@ -77,7 +77,7 @@ const jucuoData = ref([
         text1: "抓队伍",
         text2: "组织建设",
         text3: "作风建设",
-        text4: "突出“两建”",
+        text4: "突出“两腿”",
         text5: "骨血肉",
         text6: "精气神",
         text7: "强化功能 理顺机制",

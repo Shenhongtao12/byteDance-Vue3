@@ -3,7 +3,9 @@
         <div class="left-line" :style="{ backgroundColor: `${leftLineColor}` }"></div>
         <div class="detail">
             <span class="title">{{ title }}</span>
-            <span>{{ des }}</span>
+            <div class="truncate" :title="des">
+               {{ des }}
+            </div>
         </div>
     </div>
 </template>
@@ -35,7 +37,7 @@ const props = defineProps({
     }
 })
 const { leftLineColor, title, des, index } = toRefs(props)
-
+// const truncateElement = ref(null);
 
 function clicked() {
     emit('clicked', {
@@ -43,6 +45,12 @@ function clicked() {
         index: index.value
     });
 }
+
+onMounted(() => {
+    // if (truncateElement.value.offsetHeight < truncateElement.value.scrollHeight) {
+    // truncateElement.value.setAttribute('title', truncateElement.value.innerText);
+    // }
+})
 
 </script>
   
@@ -52,7 +60,7 @@ function clicked() {
     box-shadow: 0px 0px 14px 2px #D2E3F2;
     border-radius: 10px;
     cursor: pointer;
-    min-height: 150px;
+    min-height: 157px;
     width: 658px;
 }
 
@@ -78,4 +86,16 @@ function clicked() {
 .active {
   background-color: #D2E3F2; 
 }
+.truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* 最多显示的行数 */
+  line-height: 1.4; /* 行高，根据需要调整 */
+  max-height: calc(1.4 * 4); /* 最大高度 = 行高 * 行数 */
+  text-overflow: ellipsis;
+  white-space: normal; /* 多行文本需要设置为normal */
+}
+
+
 </style>
