@@ -12,7 +12,7 @@
             @mouseleave="go()"
             @click="open(link)"
           >
-            <el-image class="img" :src="baseUrl + list.imageUrl" fit="cover">
+            <el-image class="img" :src="list.imageUrl" fit="cover">
             </el-image>
           </li>
         </transition-group>
@@ -53,7 +53,6 @@
 import { toRefs, ref, onMounted } from "vue";
 import { listCarousel } from "@/api/system/carousel";
 
-const baseUrl = import.meta.env.VITE_APP_BASE_API;
 const slideList = ref([]);
 const currentIndex = ref(0); // 当前显示的图片的索引
 const timer = ref(null); // 自动切换的定时器

@@ -10,7 +10,7 @@
       >
         <el-image
           class="img"
-          :src="baseUrl + item.coverUrl"
+          :src="item.coverUrl"
           fit="cover"
         ></el-image>
         <div class="content">
@@ -52,8 +52,6 @@ import Pagination from "@/components/Pagination";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
-const baseUrl = import.meta.env.VITE_APP_BASE_API;
 const newsTrendsList = ref([]);
 const total = ref(0);
 const queryParams = ref({

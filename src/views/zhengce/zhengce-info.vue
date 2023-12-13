@@ -28,7 +28,7 @@
     </div>
     <div class="zixun-button">
         <el-button type="primary" plain size="large" @click="zixun">
-            <span style="font-size: 16px;">我要咨询</span>
+            <span style="font-size: 16px;">申报咨询</span>
         </el-button>
     </div>
     <div class="content">

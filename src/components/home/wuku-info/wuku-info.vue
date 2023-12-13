@@ -26,7 +26,7 @@
           @click="setClickedType(index)"
           link
         >
-          {{ button.text }}
+          {{ button.value }}
         </span>
       </div>
       <div class="search">
@@ -176,8 +176,17 @@
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" label="所属单位" prop="enterprise" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 4" width="90" label="所属地区" prop="district" />
 
-      <el-table-column :show-overflow-tooltip="true" width="90" label="联系人" prop="contact" />
-      <el-table-column :show-overflow-tooltip="true" width="130" label="联系方式" prop="phone" />
+      <!-- <el-table-column :show-overflow-tooltip="true" width="90" label="联系人" prop="contact" />
+      <el-table-column :show-overflow-tooltip="true" width="130" label="联系方式" prop="phone" /> -->
+
+        <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 0" label="" width="100" align="center" class-name="small-padding fixed-width">
+          <template #default="scope">
+            <el-button
+              type="primary" link
+              @click="zixun($event, scope.row)"
+            >我要咨询</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <div class="page">
@@ -191,11 +200,13 @@
       />
     </div>
   </el-card>
+  <ZixunForm ref="zixunDialogRef" :demandType="3" />
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, getCurrentInstance } from "vue";
 import Pagination from "@/components/Pagination";
 import { listSelectConfig } from "@/api/system/selectConfig";
+import ZixunForm from "@/components/zixun-form"
 import {
   listAchievement,
   listFoundation,
@@ -203,6 +214,7 @@ import {
   listRequirement,
   listTalents,
 } from "@/api/system/wuku";
+const { proxy } = getCurrentInstance();
 
 const total = ref(0);
 const queryParams = ref({
@@ -221,14 +233,21 @@ const selectConfigList = ref([
 ]);
 
 const wukuType = ref([
-  { text: "技术需求", clicked: true },
-  { text: "技术研究项目", clicked: false },
-  { text: "重大成果", clicked: false },
-  { text: "人才", clicked: false },
-  { text: "基金", clicked: false },
+  { text: "技术需求", value: "需求库", clicked: true },
+  { text: "技术研究项目", value: "项目库", clicked: false },
+  { text: "重大成果", value: "成果库", clicked: false },
+  { text: "人才", value: "人才库", clicked: false },
+  { text: "基金", value: "资金库", clicked: false },
 ]);
 
 const keyword = ref("");
+
+// 打开咨询的对话框
+function zixun(event, row) {
+  event.stopPropagation(); // 阻止事件冒泡
+  let content =  "咨询" + row.reqEnterprise + "关于" + row.name + "的相关内容";
+  proxy.$refs["zixunDialogRef"].openDialog(content);
+}
 
 function search() {
   queryParams.value.name = keyword.value;

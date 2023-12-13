@@ -45,8 +45,6 @@ import { toRefs, ref, onMounted } from 'vue'
 import { Picture as IconPicture } from '@element-plus/icons-vue'
 import { useRouter } from "vue-router";
 
-const baseUrl = import.meta.env.VITE_APP_BASE_API;
-
 const router = useRouter();
 
 const props = defineProps({
@@ -84,7 +82,7 @@ function reset2() {
 
 onMounted(() => {
     image.value = {
-        url: baseUrl + imageUrl.value,
+        url: imageUrl.value,
         id: news.value && news.value.length > 0 ? news.value[0].id : ""
     }
 })
@@ -93,7 +91,7 @@ onMounted(() => {
 const handleMouseOver = (item) => {
     selectImage.value = true;
     image.value =  {
-        url: baseUrl + item.coverUrl,
+        url: item.coverUrl,
         id: item.id
     }
     

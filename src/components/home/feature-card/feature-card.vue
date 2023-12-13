@@ -3,7 +3,7 @@
         <div class="left-line" :style="{ backgroundColor: `${leftLineColor}` }"></div>
         <div class="detail">
             <span class="title">{{ title }}</span>
-            <div class="truncate" :title="des">
+            <div class="truncate" :class="{truncateHidden: !isActive}" :title="des">
                {{ des }}
             </div>
         </div>
@@ -54,14 +54,14 @@ onMounted(() => {
 
 </script>
   
-<style scoped>
+<style lang="less" scoped>
 .home-feature-card {
     display: flex;
     box-shadow: 0px 0px 14px 2px #D2E3F2;
     border-radius: 10px;
     cursor: pointer;
-    min-height: 157px;
-    width: 658px;
+    min-height: 180px;
+    width: 600px;
 }
 
 .left-line {
@@ -86,13 +86,18 @@ onMounted(() => {
 .active {
   background-color: #D2E3F2; 
 }
+
 .truncate {
+    line-height: 1.4;
+}
+
+.truncateHidden {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; /* 最多显示的行数 */
+  -webkit-line-clamp: 5; /* 最多显示的行数 */
   line-height: 1.4; /* 行高，根据需要调整 */
-  max-height: calc(1.4 * 4); /* 最大高度 = 行高 * 行数 */
+  max-height: calc(1.4 * 5); /* 最大高度 = 行高 * 行数 */
   text-overflow: ellipsis;
   white-space: normal; /* 多行文本需要设置为normal */
 }

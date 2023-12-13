@@ -7,7 +7,9 @@
             </div>
             <div class="title">{{ title }}</div>
         </div>
-        <div class="description" v-html="description"></div>
+        <div class="description">
+            {{ desc }}
+        </div>
         <div class="footer">
             <el-button color="#D6E6F3" size="small">
                 <span style="color: #0062A8;">查看详情&nbsp;</span><el-icon color="#0062A8"><Right /></el-icon>
@@ -18,7 +20,7 @@
 
 <script setup>
 import { Right } from '@element-plus/icons-vue';
-import { toRefs } from 'vue'
+import { onMounted, ref, toRefs } from 'vue'
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -47,6 +49,13 @@ const props = defineProps({
 })
 
 const { id, yearMonth, day, title, description } = toRefs(props)
+
+let desc = ref("");
+
+onMounted(() => {
+    let text = description.value;
+    desc.value = text.replace(/<[^>]+>/g, '');
+})
 
 function goPolicyInfo() {
     router.push("/zhengcexiangqing/" + id.value);
