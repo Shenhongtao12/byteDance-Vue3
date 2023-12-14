@@ -22,7 +22,7 @@
       <part-title title="指标展示" />
       <div class="indicator-grid-container">
         <indicator-card :backgroundImage="card1Image" title="产业链" subTitle="两链融合" :price="indexStatistics.chain" price-color="#0062A8" unit="条" routerPath="/lianglianronghe" />
-        <indicator-card :backgroundImage="card2Image" title="总交易金额" subTitle="技术交易" :price="indexStatistics.tradin" price-color="#C2A341" unit="亿元" routerPath="/jishujiaoyi" />
+        <indicator-card :backgroundImage="card2Image" title="总交易金额" subTitle="技术交易" :price="4.5" price-color="#C2A341" unit="亿元" routerPath="/jishujiaoyi" />
         <indicator-card :backgroundImage="card3Image" title="技术需求" subTitle="成果转化" :price="indexStatistics.convert" price-color="#00B5FF" unit="项" routerPath="/chengguozhuanhua" />
         <indicator-card :backgroundImage="card4Image" title="政策措施" subTitle="科技政策" :price="indexStatistics.olicy" price-color="#380E9B" unit="项" routerPath="/kejizhengce" />
         <indicator-card :backgroundImage="card5Image" title="经费支出" subTitle="R&D经费支出" :price="indexStatistics.expenditure" price-color="#00E3C0" unit="亿元" routerPath="/rdjingweizhichu" />

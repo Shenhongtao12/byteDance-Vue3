@@ -2,9 +2,7 @@
   <div style="display: flex; justify-content: center">
     <div class="header" :class="[{ fixedToTop }, themeColor]" ref="header">
       <div class="logo">
-        <a href="https://www.qinchuangyuan.com/html/web/index.html">
           <img src="../assets/logo.png" class="logo" />
-        </a>
       </div>
       <ul class="navbar">
         <li class="navbar-item">

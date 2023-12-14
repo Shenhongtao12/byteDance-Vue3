@@ -17,7 +17,7 @@
           </span>
         </div>
     </div>
-    <div style="background-color: #fff">
+    <div style="background-color: #fff" v-if="tableTypeNum != 5">
       <div class="type">
         <span class="title">产业赛道</span>
         <div style="display: flex; flex-wrap: wrap">
@@ -34,6 +34,7 @@
         </div>
       </div>
     </div>
+    <div v-else style="margin-top: 25px;"></div>
     <div class="table">
       <el-table
         v-loading="loading"
@@ -59,7 +60,7 @@
         <el-table-column :show-overflow-tooltip="true" v-if="tableTypeNum == 5" label="注册名称" align="center" prop="registerName" />
         <el-table-column
           :show-overflow-tooltip="true"
-          v-if="lastSelectType == 0"
+          v-if="lastSelectType == 0 && tableTypeNum != 5"
           width="150px"
           prop="classify"
           align="center"

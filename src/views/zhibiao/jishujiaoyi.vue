@@ -224,11 +224,11 @@ function initHeTongAmount() {
   const data = echarsData.value.contractAmountList;
   let legendData = [];
   let seriesData = [];
-  let yMax = 10;
+  let yMax = 5;
   if (data && data.length > 0) {
     legendData = data.map((x) => x.type);
     for (let i = 0; i < legendData.length; i++) {
-      let tmpMax = Math.round(Math.max(...data[i].amountArray) + 5);
+      let tmpMax = Math.round(Math.max(...data[i].amountArray));
       yMax = tmpMax > yMax ? tmpMax : yMax;
       seriesData.push({
         name: legendData[i],
@@ -548,7 +548,10 @@ const echarsData = ref({});
 
 function getList() {
   echars().then((res) => {
-    echarsData.value = res.data;
+    //echarsData.value = res.data;
+    //设置假数据
+    setMorkData();
+
     for(let i=0;i<echarsData.value.contractTypeList.length;i++) {
       echarsData.value.contractTypeList[i].img =  (i+2);
       echarsData.value.contractDomainList[i].img = + (i+11);
@@ -558,6 +561,75 @@ function getList() {
     initHetongType();
     initShanxiAmount();
   });
+}
+
+function setMorkData() {
+  echarsData.value = {
+    sumAmount: 4.5,
+    sumContractNum: 188,
+    // 合同类型及金额
+    contractTypeList: [
+      {
+        type: "技术服务",
+        amount: 0.08
+      },
+      {
+        type: "技术开发",
+        amount: 0.04
+      },
+      {
+        type: "技术转让",
+        amount: 0
+      },
+      {
+        type: "技术咨询",
+        amount: 0.03
+      },
+    ],
+      // 合同数量
+    contractNumList: [
+      {
+        type: "2021",
+        numArray: [26,3,1,2,12,22,112,0,0,0,0,0]
+      },
+      {
+        type: "2022",
+        numArray: [30,3,5,0,0,0,0,0,0,0,0,0]
+      }
+    ],
+    // 合同金额
+    contractAmountList: [
+      {
+        type: "2021",
+        amountArray: [0.41,0.38,0,0.72,0.68,0.03,4.59,0,0,0,0,0]
+      },
+      {
+        type: "2022",
+        amountArray: [0.14,0,0.03,0,0,0,0,0,0,0,0,0]
+      }
+    ],
+    // 陕西省内
+    shanxiList: ["西安市", "咸阳市", "宝鸡市", "渭南市", "汉中市", "安康市", "榆林市", "延安市", "商洛市", "铜川市", "杨凌区"],
+    shanxiAmountList: [3366.92,99.39,73.24,32.53,15.24,8.18,6.81,5.93,3.4,2.99,2.39],
+    contractDomainList: [
+      {
+        type: "农业",
+        amount: 0.08
+      },
+      {
+        type: "航空航天",
+        amount: 0.04
+      },
+      {
+        type: "新能源与高效节能",
+        amount: 0.03
+      },
+      {
+        type: "环境保护与资源综合利用",
+        amount: 0
+      }
+    ]
+  }
 }
 </script>
 <style scoped>

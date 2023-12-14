@@ -34,7 +34,7 @@ export default defineConfig({
         open: true,
         proxy: {
             '/dev-api': {
-                target: 'http://47.109.60.162:8080',
+                target: 'http://localhost:8080',
                 changeOrigin: true,
                 rewrite: (p) => p.replace(/^\/dev-api/, '')
             },
@@ -44,7 +44,7 @@ export default defineConfig({
                 rewrite: (p) => p.replace(/^\/stage-api/, '')
             },
             '/prod-api': {
-                target: 'http://47.109.60.162:8080',
+                target: 'https://service-yunlin-test.qinchuangyuan.com',
                 changeOrigin: true,
                 rewrite: (p) => p.replace(/^\/prod-api/, '')
             }
