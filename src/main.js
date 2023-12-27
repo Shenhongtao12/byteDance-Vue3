@@ -9,10 +9,11 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'animate.css';
 
-import { parseTime, resetForm, addDateRange } from '@/utils/ruoyi'
+import { parseTime, resetForm, addDateRange, desensitizeName } from '@/utils/ruoyi'
 
 const app = createApp(App)
 
+app.config.globalProperties.desensitizeName = desensitizeName
 app.config.globalProperties.parseTime = parseTime
 app.config.globalProperties.resetForm = resetForm
 app.config.globalProperties.addDateRange = addDateRange

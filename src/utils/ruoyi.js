@@ -1,4 +1,13 @@
-
+/**
+ * 脱敏
+ */
+export function desensitizeName(name) {
+  if (name.length <= 1) {
+    return name;
+  }
+  const lastChar = name.substring(name.length - 1);
+  return "*".repeat(name.length - 1) + lastChar;
+}
 
 /**
  * 通用js方法封装处理

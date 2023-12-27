@@ -163,7 +163,11 @@
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 2" label="委托单位" prop="entrustEnterprise" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 2" width="90" label="所属地区" prop="district" />
       <!-- 人才 -->
-      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" width="100" class="wordTitle" label="姓名" prop="name" />
+      <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" width="100" class="wordTitle" label="姓名" prop="name">
+        <template #default="scope">
+          {{ desensitizeName(scope.row.name) }}
+        </template>
+      </el-table-column>
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" width="90" label="年龄" prop="age" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" width="90" label="性别" prop="sex" />
       <el-table-column :show-overflow-tooltip="true" v-if="lastSelectType == 3" label="单位" prop="enterprise" />

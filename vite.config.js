@@ -39,12 +39,12 @@ export default defineConfig({
                 rewrite: (p) => p.replace(/^\/dev-api/, '')
             },
             '/stage-api': {
-                target: 'http://47.109.60.162:8080',
+                target: 'https://service-yunlin-test.qinchuangyuan.com',
                 changeOrigin: true,
                 rewrite: (p) => p.replace(/^\/stage-api/, '')
             },
             '/prod-api': {
-                target: 'https://service-yunlin-test.qinchuangyuan.com',
+                target: 'https://service-yunlin.qinchuangyuan.com',
                 changeOrigin: true,
                 rewrite: (p) => p.replace(/^\/prod-api/, '')
             }

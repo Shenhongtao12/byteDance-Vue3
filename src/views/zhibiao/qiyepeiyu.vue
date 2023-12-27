@@ -47,7 +47,7 @@
           width="180"
         >
           <template #default="scope">
-            <span>{{ parseTime(scope.row.authTime, "{y}-{m}-{d}") }}</span>
+            <span>{{ parseTime(scope.row.authTime, "{y}") }}</span>
           </template>
         </el-table-column>
         <el-table-column

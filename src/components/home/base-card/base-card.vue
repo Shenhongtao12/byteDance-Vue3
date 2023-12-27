@@ -38,7 +38,7 @@ const props = defineProps({
 const { title, des, buttonText } = toRefs(props);
 const demandType = ref(1);
 onMounted(() => {
-  if (buttonText == "我要发布") {
+  if (buttonText.value == "我要发布") {
     demandType.value = 1;
   } else {
     demandType.value = 2;

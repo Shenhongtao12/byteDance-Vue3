@@ -28,12 +28,25 @@
           style="width: 100%; min-height: 200px;"
         >
           <el-table-column type="index" align="center" label="序号" width="80" />
-          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.expertName" :label="tablePropertySetup.expertName" align="center" prop="expertName" width="120" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.expertName" :label="tablePropertySetup.expertName" align="center" prop="expertName" width="120">
+            <template #default="scope">
+              {{ desensitizeName(scope.row.expertName) }}
+            </template>
+          </el-table-column>
           <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.politicalStatus" :label="tablePropertySetup.politicalStatus" align="center" prop="politicalStatus" width="100" />
           <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.enterprise" :label="tablePropertySetup.enterprise" align="center" prop="enterprise" />
           <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.nature" :label="tablePropertySetup.nature" align="center" prop="nature" />
           <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.cooperationUnit" :label="tablePropertySetup.cooperationUnit" align="center" prop="cooperationUnit" />
-          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.position" :label="tablePropertySetup.position" align="center" prop="position" />
+          <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.position" :label="tablePropertySetup.position" align="center" prop="position">
+            <template #default="scope">
+              <span v-if="tablePropertySetup.position == '首席工程师'">
+                {{ desensitizeName(scope.row.position) }}
+              </span>
+              <span v-else>
+                {{ scope.row.position }}
+              </span>
+            </template>
+          </el-table-column>
           <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.workContent" :label="tablePropertySetup.workContent" align="center" prop="workContent" />
           <el-table-column :show-overflow-tooltip="true" v-if="tablePropertySetup.expertType" :label="tablePropertySetup.expertType" align="center" prop="expertType" />
         </el-table>
@@ -152,7 +165,6 @@ function kejijingjiren() {
     politicalStatus: "政治面貌",
     enterprise: "工作单位",
     nature: "技术职称",
-    expertType: "专家类型",
     position: "职务",
     workContent: "工作内容"
   }
@@ -173,7 +185,7 @@ function xinshuangchuang() {
     expertName: "姓名",
     enterprise: "所在单位",
     nature: "人才称号",
-    cooperationUnit: "联系方式",
+    // cooperationUnit: "联系方式",
     position: "职务",
   }
 }
